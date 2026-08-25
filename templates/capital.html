@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Capital Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #f4f6f8;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           CURRENT CAPITAL
+        ========================= */
+
+        .capital-card {
+            text-align: center;
+            background: #ecfdf5;
+            border: 2px solid #16a34a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .capital-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .capital-amount {
+            font-size: 42px;
+            font-weight: bold;
+            color: #16a34a;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #16a34a;
+            box-shadow: 0 0 0 2px rgba(22,163,74,0.12);
+        }
+
+        /* =========================
+           SAVE BUTTON
+        ========================= */
+
+        .save-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #16a34a;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #15803d;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-button {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            background: #6b7280;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #4b5563;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .box {
+                padding: 20px;
+            }
+
+            .capital-amount {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="box">
+
+
+        <h1>
+            💰 Capital Management
+        </h1>
+
+
+        <!-- =========================
+             CURRENT CAPITAL
+        ========================= -->
+
+        <div class="capital-card">
+
+            <div class="capital-title">
+                Current Capital
+            </div>
+
+
+            <div class="capital-amount">
+
+                ₹ {{ "%.2f"|format(capital|default(0)|float) }}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             SET CAPITAL
+        ========================= -->
+
+        <form
+            action="{{ url_for('capital_page') }}"
+            method="POST"
+        >
+
+
+            <div class="form-group">
+
+
+                <label>
+                    Set / Update Capital
+                </label>
+
+
+                <input
+                    type="number"
+                    name="capital"
+                    step="0.01"
+                    min="0"
+                    value="{{ capital|default(0) }}"
+                    placeholder="Enter Capital"
+                    required
+                >
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                💾 Save Capital
+            </button>
+            
+
+
+        </form>
+
+
+        <!-- =========================
+             BACK
+        ========================= -->
+
+        <a
+            href="/"
+            class="back-button"
+        >
+            ⬅️ Back to Main Page
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

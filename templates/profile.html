@@ -1,0 +1,3156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Customer Details</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    padding: 25px;
+
+    background: #f4f6f8;
+
+    font-family: Arial, sans-serif;
+}
+
+
+.container {
+
+    max-width: 1150px;
+
+    margin: auto;
+}
+
+
+.box {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.08);
+
+    margin-bottom: 20px;
+}
+
+
+h1 {
+
+    text-align: center;
+
+    color: #1f2937;
+
+    margin-top: 0;
+}
+
+
+h2 {
+
+    color: #2563eb;
+
+    border-bottom:
+        2px solid #e5e7eb;
+
+    padding-bottom: 10px;
+}
+
+
+/* =========================================
+   CUSTOMER DETAILS
+========================================= */
+
+.customer-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.detail {
+
+    background: #f8fafc;
+
+    padding: 14px;
+
+    border-radius: 8px;
+}
+
+
+.label {
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+
+.value {
+
+    font-size: 16px;
+
+    color: #111827;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.transaction-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 1000px;
+}
+
+
+.transaction-table th {
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 12px;
+
+    text-align: left;
+}
+
+
+.transaction-table td {
+
+    padding: 8px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.transaction-table input,
+.transaction-table select {
+
+    width: 100%;
+
+    padding: 10px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    background: white;
+}
+
+
+.site-other {
+
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button {
+
+    cursor: pointer;
+}
+
+
+.add-btn {
+
+    margin-top: 15px;
+
+    background: #16a34a;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+}
+
+
+.delete-btn {
+
+    background: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    padding: 9px 12px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+}
+
+
+.save-button {
+
+    background: #16a34a;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    font-size: 16px;
+}
+
+
+.update-button {
+
+    background: #f59e0b;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    font-size: 16px;
+}
+
+
+.print-button {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    font-size: 16px;
+}
+
+
+.back-button {
+
+    background: #6b7280;
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    text-align: center;
+}
+
+
+.buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+
+.buttons > * {
+
+    flex: 1;
+}
+
+
+/* =========================================
+   TOTAL
+========================================= */
+
+.amount-summary {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 15px 5px;
+
+    gap: 80px;
+}
+
+
+.in-words {
+
+    flex: 1;
+
+    text-align: left;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    color: #374151;
+}
+
+
+.total-box {
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.total-amount {
+
+    color: #16a34a;
+
+    font-size: 24px;
+}
+
+
+/* =========================================
+   NOTE
+========================================= */
+
+.receipt-note {
+
+    margin-top: 5px;
+
+    padding: 12px 5px;
+
+    font-size: 14px;
+
+    color: #555;
+
+    text-align: left;
+
+    border-top:
+        1px solid #e5e7eb;
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+.history-item {
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
+
+    background: #f9fafb;
+}
+
+
+.history-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+.history-title {
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    color: #111827;
+}
+
+
+.history-info {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+
+.history-total {
+
+    color: #16a34a;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+.history-actions {
+
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.history-print {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 9px 14px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+.history-edit {
+
+    background: #f59e0b;
+
+    color: white;
+
+    border: none;
+
+    padding: 9px 14px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+.history-delete {
+
+    background: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    padding: 9px 14px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   EDIT MODE
+========================================= */
+
+.edit-heading {
+
+    background: #fff7ed;
+
+    border:
+        1px solid #fed7aa;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+
+    color: #9a3412;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+.print-receipt {
+
+    width: 100%;
+
+    border: 2px solid #000;
+
+    padding: 12px;
+
+    background: white;
+
+    color: #000;
+
+    font-family: Arial, sans-serif;
+}
+
+
+.print-header {
+
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+
+.print-header h1 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    color: #000;
+}
+
+
+.print-header h2 {
+
+    margin: 3px 0 8px;
+
+    padding: 0;
+
+    border: none;
+
+    font-size: 17px;
+
+    color: #000;
+}
+
+
+.print-customer {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 4px 18px;
+
+    margin-bottom: 8px;
+}
+
+
+.print-customer-item {
+
+    font-size: 13px;
+
+    padding: 3px 0;
+}
+
+
+.print-customer-item strong {
+
+    display: inline-block;
+
+    min-width: 105px;
+}
+
+
+.print-transaction-title {
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    margin: 7px 0 5px;
+
+    border-top:
+        1px solid #000;
+
+    padding-top: 7px;
+}
+
+
+.print-transaction-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 12px;
+}
+
+
+.print-transaction-table th,
+.print-transaction-table td {
+
+    border:
+        1px solid #000;
+
+    padding: 5px 6px;
+
+    text-align: left;
+}
+
+
+.print-summary {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-top: 8px;
+
+    padding-top: 7px;
+
+    border-top:
+        1px solid #000;
+
+    font-size: 13px;
+}
+
+
+.print-words {
+
+    flex: 1;
+}
+
+
+.print-total {
+
+    white-space: nowrap;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+
+.print-note {
+
+    margin-top: 7px;
+
+    padding-top: 6px;
+
+    border-top:
+        1px solid #000;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px) {
+
+    body {
+
+        padding: 12px;
+    }
+
+
+    .box {
+
+        padding: 15px;
+    }
+
+
+    .customer-details {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .buttons {
+
+        flex-direction: column;
+    }
+
+
+    .amount-summary {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+    }
+
+
+    .total-box {
+
+        justify-content:
+            flex-end;
+    }
+
+
+    .history-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+}
+
+
+/* =========================================
+   PRINT MEDIA
+========================================= */
+
+@media print {
+
+    @page {
+
+        margin: 8mm;
+
+        size: auto;
+    }
+
+
+    body {
+
+        margin: 0;
+
+        padding: 0;
+
+        background: white;
+    }
+
+
+    .container {
+
+        width: 100%;
+
+        max-width: none;
+
+        margin: 0;
+    }
+
+
+    .no-print {
+
+        display: none !important;
+    }
+
+
+    .print-receipt {
+
+        display: block !important;
+
+        width: 100%;
+
+        border:
+            2px solid #000 !important;
+
+        border-radius: 0 !important;
+
+        box-shadow:
+            none !important;
+
+        padding: 12px !important;
+
+        margin: 0 !important;
+    }
+
+}
+
+
+@media print {
+
+    body:has(.print-receipt) >
+    .container >
+    .box:not(.print-receipt) {
+
+        display: none !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+{% if not print_mode %}
+
+<div class="box">
+
+
+<h1>
+    🏦 RTR GROUP COMPUTER
+</h1>
+
+
+<h1>
+    Customer Details
+</h1>
+
+
+<h2>
+    👤 Account Information
+</h2>
+
+
+<div class="customer-details">
+
+
+<div class="detail">
+
+<div class="label">
+    Account Number
+</div>
+
+<div class="value">
+    {{ customer["account_number"] }}
+</div>
+
+</div>
+
+
+<div class="detail">
+
+<div class="label">
+    Name
+</div>
+
+<div class="value">
+    {{ customer["name"] }}
+</div>
+
+</div>
+
+
+<div class="detail">
+
+<div class="label">
+    Mobile Number
+</div>
+
+<div class="value">
+    {{ customer["mobile"] or "-" }}
+</div>
+
+</div>
+
+
+<div class="detail">
+
+<div class="label">
+    Bank Name
+</div>
+
+<div class="value">
+    {{ customer["bank_name"] or "-" }}
+</div>
+
+</div>
+
+
+<div class="detail">
+
+<div class="label">
+    IFSC Code
+</div>
+
+<div class="value">
+    {{ customer["ifsc_code"] or "-" }}
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+{% endif %}
+
+
+{% if print_mode %}
+
+
+<div class="print-receipt">
+
+
+<div class="print-header">
+
+<h1>
+    RTR GROUP COMPUTER
+</h1>
+
+<h2>
+    Customer Transaction Receipt
+</h2>
+
+</div>
+
+
+<div class="print-customer">
+
+
+<div class="print-customer-item">
+
+<strong>
+    Account Number:
+</strong>
+
+{{ customer["account_number"] }}
+
+</div>
+
+
+<div class="print-customer-item">
+
+<strong>
+    Name:
+</strong>
+
+{{ customer["name"] }}
+
+</div>
+
+
+<div class="print-customer-item">
+
+<strong>
+    Mobile Number:
+</strong>
+
+{{ customer["mobile"] or "-" }}
+
+</div>
+
+
+<div class="print-customer-item">
+
+<strong>
+    Bank Name:
+</strong>
+
+{{ customer["bank_name"] or "-" }}
+
+</div>
+
+
+<div class="print-customer-item">
+
+<strong>
+    IFSC Code:
+</strong>
+
+{{ customer["ifsc_code"] or "-" }}
+
+</div>
+
+
+</div>
+
+
+<div class="print-transaction-title">
+
+Transaction Details
+
+</div>
+
+
+<table class="print-transaction-table">
+
+
+<thead>
+
+<tr>
+
+<th>
+    Amount
+</th>
+
+<th>
+    Date & Time
+</th>
+
+<th>
+    UTR Number
+</th>
+
+<th>
+    Site
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+{% for transaction in print_transactions %}
+
+
+<tr>
+
+<td>
+    ₹{{ "%.2f"|format(
+        transaction["amount"] or 0
+    ) }}
+</td>
+
+<td>
+    {{ transaction["transaction_datetime"] or "-" }}
+</td>
+
+<td>
+    {{ transaction["utr_number"] or "-" }}
+</td>
+
+<td>
+    {{ transaction["site"] or "-" }}
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+
+</table>
+
+
+<div class="print-summary">
+
+
+<div class="print-words">
+
+<strong>
+    In Words:
+</strong>
+
+<span id="printWords">
+</span>
+
+</div>
+
+
+<div class="print-total">
+
+Total Amount:
+
+₹{{ "%.2f"|format(
+    total_amount or 0
+) }}
+
+</div>
+
+
+</div>
+
+
+<div class="print-note">
+
+<strong>
+    Note:
+</strong>
+
+This is computer generated receipt
+and does not require signature.
+
+</div>
+
+
+</div>
+
+
+<script>
+
+function numberToWords(num) {
+
+    num = Math.floor(
+        Number(num)
+    );
+
+
+    if (num === 0) {
+
+        return "Zero";
+
+    }
+
+
+    const ones = [
+
+        "",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Eleven",
+        "Twelve",
+        "Thirteen",
+        "Fourteen",
+        "Fifteen",
+        "Sixteen",
+        "Seventeen",
+        "Eighteen",
+        "Nineteen"
+
+    ];
+
+
+    const tens = [
+
+        "",
+        "",
+        "Twenty",
+        "Thirty",
+        "Forty",
+        "Fifty",
+        "Sixty",
+        "Seventy",
+        "Eighty",
+        "Ninety"
+
+    ];
+
+
+    function twoDigits(n) {
+
+        if (n < 20) {
+
+            return ones[n];
+
+        }
+
+
+        return tens[
+            Math.floor(n / 10)
+        ] +
+
+        (
+
+            n % 10
+
+                ? " " + ones[n % 10]
+
+                : ""
+
+        );
+
+    }
+
+
+    function threeDigits(n) {
+
+        let result = "";
+
+
+        if (n >= 100) {
+
+            result +=
+
+                ones[
+                    Math.floor(n / 100)
+                ]
+
+                + " Hundred";
+
+
+            n %= 100;
+
+
+            if (n > 0) {
+
+                result += " ";
+
+            }
+
+        }
+
+
+        if (n > 0) {
+
+            result +=
+                twoDigits(n);
+
+        }
+
+
+        return result;
+
+    }
+
+
+    let result = "";
+
+
+    let crore =
+
+        Math.floor(
+            num / 10000000
+        );
+
+
+    num %= 10000000;
+
+
+    let lakh =
+
+        Math.floor(
+            num / 100000
+        );
+
+
+    num %= 100000;
+
+
+    let thousand =
+
+        Math.floor(
+            num / 1000
+        );
+
+
+    num %= 1000;
+
+
+    if (crore > 0) {
+
+        result +=
+
+            threeDigits(crore)
+
+            + " Crore ";
+
+    }
+
+
+    if (lakh > 0) {
+
+        result +=
+
+            threeDigits(lakh)
+
+            + " Lakh ";
+
+    }
+
+
+    if (thousand > 0) {
+
+        result +=
+
+            threeDigits(thousand)
+
+            + " Thousand ";
+
+    }
+
+
+    if (num > 0) {
+
+        result +=
+            threeDigits(num);
+
+    }
+
+
+    return result.trim();
+
+}
+
+
+document.getElementById(
+    "printWords"
+).innerText =
+
+    numberToWords(
+        "{{ total_amount or 0 }}"
+    )
+
+    + " Rupees Only";
+
+
+window.onload = function() {
+
+    window.print();
+
+};
+
+</script>
+
+
+{% elif edit_mode %}
+
+
+<!-- =====================================================
+     EDIT TRANSACTION
+====================================================== -->
+
+<div class="box">
+
+
+<h2>
+    ✏️ Edit Transaction
+</h2>
+
+
+<div class="edit-heading">
+
+Editing Transaction #{{ edit_batch["id"] }}
+
+</div>
+
+
+<form
+    method="POST"
+    action="{{ url_for(
+        'update_transaction',
+        batch_id=edit_batch['id']
+    ) }}"
+>
+
+
+<div class="table-wrapper">
+
+
+<table class="transaction-table">
+
+
+<thead>
+
+<tr>
+
+<th>
+    Amount
+</th>
+
+<th>
+    Date & Time
+</th>
+
+<th>
+    UTR Number
+</th>
+
+<th>
+    Site
+</th>
+
+<th class="no-print">
+    Delete
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="editTransactionBody">
+
+
+{% for transaction in edit_transactions %}
+
+
+<tr>
+
+
+<input
+    type="hidden"
+    name="transaction_id[]"
+    value="{{ transaction['id'] }}"
+>
+
+
+<td>
+
+<input
+    type="text"
+    name="amount[]"
+    class="edit-amount"
+    value="{{ transaction['amount'] or '' }}"
+    oninput="calculateEditTotal()"
+>
+
+</td>
+
+
+<td>
+
+<input
+    type="text"
+    name="transaction_datetime[]"
+    value="{{ transaction['transaction_datetime'] or '' }}"
+    placeholder="DD/MM/YYYY HH:MM"
+>
+
+</td>
+
+
+<td>
+
+<input
+    type="text"
+    name="utr_number[]"
+    value="{{ transaction['utr_number'] or '' }}"
+    placeholder="UTR Number"
+>
+
+</td>
+
+
+<td>
+
+{% set current_site = transaction['site'] or '' %}
+
+<select
+    class="site-select"
+    onchange="handleSiteChange(this)"
+>
+
+<option value="">
+    Select Site
+</option>
+
+<option
+    value="QUICKNPAY"
+    {% if current_site == "QUICKNPAY" %}selected{% endif %}
+>
+    QUICKNPAY
+</option>
+
+<option
+    value="REMIT PAY"
+    {% if current_site == "REMIT PAY" %}selected{% endif %}
+>
+    REMIT PAY
+</option>
+
+<option
+    value="SOUL PAY"
+    {% if current_site == "SOUL PAY" %}selected{% endif %}
+>
+    SOUL PAY
+</option>
+
+<option
+    value="SEKUREPE"
+    {% if current_site == "SEKUREPE" %}selected{% endif %}
+>
+    SEKUREPE
+</option>
+
+<option
+    value="SPAY INDIA"
+    {% if current_site == "SPAY INDIA" %}selected{% endif %}
+>
+    SPAY INDIA
+</option>
+
+<option
+    value="OTHER"
+    {% if current_site and current_site not in
+        ["QUICKNPAY","REMIT PAY","SOUL PAY","SEKUREPE","SPAY INDIA"] %}
+        selected
+    {% endif %}
+>
+    Other
+</option>
+
+</select>
+
+
+<input
+    type="text"
+    class="site-other"
+    placeholder="Enter site manually"
+
+    value="{% if current_site and current_site not in ['QUICKNPAY','REMIT PAY','SOUL PAY','SEKUREPE','SPAY INDIA'] %}{{ current_site }}{% endif %}"
+
+    {% if current_site and current_site not in
+        ["QUICKNPAY","REMIT PAY","SOUL PAY","SEKUREPE","SPAY INDIA"] %}
+        style="display:block;"
+    {% else %}
+        style="display:none;"
+    {% endif %}
+
+    oninput="syncSiteValue(this)"
+>
+
+
+<input
+    type="hidden"
+    name="site[]"
+    class="site-value"
+    value="{{ current_site }}"
+>
+
+</td>
+
+
+<td class="no-print">
+
+<button
+    type="button"
+    class="delete-btn"
+    onclick="deleteEditRow(this)"
+>
+    🗑️ Delete
+</button>
+
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+<!-- =========================================
+     ADD BUTTON
+========================================= -->
+
+<button
+    type="button"
+    class="add-btn no-print"
+    onclick="addEditRow()"
+>
+    ➕ Add
+</button>
+
+
+<div class="amount-summary">
+
+
+<div class="in-words">
+
+In Words:
+
+<span id="editWords">
+    Zero Rupees Only
+</span>
+
+</div>
+
+
+<div class="total-box">
+
+Total Amount:
+
+<span
+    class="total-amount"
+    id="editTotal"
+>
+    ₹0.00
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="buttons">
+
+
+<button
+    type="submit"
+    class="update-button"
+>
+    💾 Update Transactions
+</button>
+
+
+<a
+    href="{{ url_for(
+        'profile',
+        id=customer['id']
+    ) }}"
+    class="back-button"
+>
+    ✖ Cancel
+</a>
+
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+<script>
+
+
+function editNumberToWords(num) {
+
+    num = Math.floor(
+        Number(num)
+    );
+
+
+    if (num === 0) {
+
+        return "Zero";
+
+    }
+
+
+    const ones = [
+
+        "",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Eleven",
+        "Twelve",
+        "Thirteen",
+        "Fourteen",
+        "Fifteen",
+        "Sixteen",
+        "Seventeen",
+        "Eighteen",
+        "Nineteen"
+
+    ];
+
+
+    const tens = [
+
+        "",
+        "",
+        "Twenty",
+        "Thirty",
+        "Forty",
+        "Fifty",
+        "Sixty",
+        "Seventy",
+        "Eighty",
+        "Ninety"
+
+    ];
+
+
+    function twoDigits(n) {
+
+        if (n < 20) {
+
+            return ones[n];
+
+        }
+
+
+        return tens[
+            Math.floor(n / 10)
+        ] +
+
+        (
+
+            n % 10
+
+                ? " " + ones[n % 10]
+
+                : ""
+
+        );
+
+    }
+
+
+    function threeDigits(n) {
+
+        let result = "";
+
+
+        if (n >= 100) {
+
+            result +=
+
+                ones[
+                    Math.floor(n / 100)
+                ]
+
+                + " Hundred";
+
+
+            n %= 100;
+
+
+            if (n > 0) {
+
+                result += " ";
+
+            }
+
+        }
+
+
+        if (n > 0) {
+
+            result +=
+                twoDigits(n);
+
+        }
+
+
+        return result;
+
+    }
+
+
+    let result = "";
+
+
+    let crore =
+
+        Math.floor(
+            num / 10000000
+        );
+
+
+    num %= 10000000;
+
+
+    let lakh =
+
+        Math.floor(
+            num / 100000
+        );
+
+
+    num %= 100000;
+
+
+    let thousand =
+
+        Math.floor(
+            num / 1000
+        );
+
+
+    num %= 1000;
+
+
+    if (crore > 0) {
+
+        result +=
+
+            threeDigits(crore)
+
+            + " Crore ";
+
+    }
+
+
+    if (lakh > 0) {
+
+        result +=
+
+            threeDigits(lakh)
+
+            + " Lakh ";
+
+    }
+
+
+    if (thousand > 0) {
+
+        result +=
+
+            threeDigits(thousand)
+
+            + " Thousand ";
+
+    }
+
+
+    if (num > 0) {
+
+        result +=
+            threeDigits(num);
+
+    }
+
+
+    return result.trim();
+
+}
+
+
+/* =========================================
+   SITE CHANGE - EDIT
+========================================= */
+
+function handleSiteChange(select) {
+
+    const cell =
+        select.closest("td");
+
+
+    const other =
+        cell.querySelector(
+            ".site-other"
+        );
+
+
+    const hidden =
+        cell.querySelector(
+            ".site-value"
+        );
+
+
+    if (select.value === "OTHER") {
+
+        other.style.display =
+            "block";
+
+        other.focus();
+
+        hidden.value =
+            other.value;
+
+    }
+
+    else {
+
+        other.style.display =
+            "none";
+
+        other.value = "";
+
+        hidden.value =
+            select.value;
+
+    }
+
+}
+
+
+/* =========================================
+   MANUAL OTHER SITE
+========================================= */
+
+function syncSiteValue(input) {
+
+    const cell =
+        input.closest("td");
+
+
+    const hidden =
+        cell.querySelector(
+            ".site-value"
+        );
+
+
+    hidden.value =
+        input.value;
+
+}
+
+
+/* =========================================
+   ADD ROW IN EDIT MODE
+========================================= */
+
+function addEditRow() {
+
+    const tbody =
+        document.getElementById(
+            "editTransactionBody"
+        );
+
+
+    const row =
+        document.createElement("tr");
+
+
+    row.innerHTML = `
+
+        <input
+            type="hidden"
+            name="transaction_id[]"
+            value=""
+        >
+
+
+        <td>
+
+            <input
+                type="text"
+                name="amount[]"
+                class="edit-amount"
+                placeholder="Amount"
+                oninput="calculateEditTotal()"
+            >
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="text"
+                name="transaction_datetime[]"
+                placeholder="DD/MM/YYYY HH:MM"
+            >
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="text"
+                name="utr_number[]"
+                placeholder="UTR Number"
+            >
+
+        </td>
+
+
+        <td>
+
+            <select
+                class="site-select"
+                onchange="handleSiteChange(this)"
+            >
+
+                <option value="">
+                    Select Site
+                </option>
+
+                <option value="QUICKNPAY">
+                    QUICKNPAY
+                </option>
+
+                <option value="REMIT PAY">
+                    REMIT PAY
+                </option>
+
+                <option value="SOUL PAY">
+                    SOUL PAY
+                </option>
+
+                <option value="SEKUREPE">
+                    SEKUREPE
+                </option>
+
+                <option value="SPAY INDIA">
+                    SPAY INDIA
+                </option>
+
+                <option value="OTHER">
+                    Other
+                </option>
+
+            </select>
+
+
+            <input
+                type="text"
+                class="site-other"
+                placeholder="Enter site manually"
+                style="display:none;"
+                oninput="syncSiteValue(this)"
+            >
+
+
+            <input
+                type="hidden"
+                name="site[]"
+                class="site-value"
+                value=""
+            >
+
+        </td>
+
+
+        <td class="no-print">
+
+            <button
+                type="button"
+                class="delete-btn"
+                onclick="deleteEditRow(this)"
+            >
+                🗑️ Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    tbody.appendChild(row);
+
+
+    calculateEditTotal();
+
+}
+
+
+/* =========================================
+   DELETE ROW IN EDIT MODE
+========================================= */
+
+function deleteEditRow(button) {
+
+    const tbody =
+        document.getElementById(
+            "editTransactionBody"
+        );
+
+
+    if (tbody.rows.length <= 1) {
+
+        alert(
+            "कम से कम एक row रखें।"
+        );
+
+        return;
+
+    }
+
+
+    button
+        .closest("tr")
+        .remove();
+
+
+    calculateEditTotal();
+
+}
+
+
+/* =========================================
+   EDIT TOTAL
+========================================= */
+
+function calculateEditTotal() {
+
+    const amounts =
+        document.querySelectorAll(
+            ".edit-amount"
+        );
+
+
+    let total = 0;
+
+
+    amounts.forEach(
+        function(input) {
+
+            const value =
+                parseFloat(
+                    input.value
+                );
+
+
+            if (!isNaN(value)) {
+
+                total += value;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "editTotal"
+    ).innerText =
+        "₹" + total.toFixed(2);
+
+
+    document.getElementById(
+        "editWords"
+    ).innerText =
+        editNumberToWords(total)
+        + " Rupees Only";
+
+}
+
+
+/* Existing Other site ko page load par open karna */
+
+document
+    .querySelectorAll(
+        ".site-select"
+    )
+    .forEach(
+        function(select) {
+
+            if (
+                select.value ===
+                "OTHER"
+            ) {
+
+                handleSiteChange(
+                    select
+                );
+
+            }
+
+        }
+    );
+
+
+calculateEditTotal();
+
+</script>
+
+
+{% else %}
+
+
+<!-- =====================================================
+     NEW TRANSACTION
+====================================================== -->
+
+<div class="box">
+
+
+<h2>
+    💰 Transaction Details
+</h2>
+
+
+<form
+    method="POST"
+    action="{{ url_for(
+        'save_transactions',
+        id=customer['id']
+    ) }}"
+>
+
+
+<div class="table-wrapper">
+
+
+<table
+    class="transaction-table"
+    id="transactionTable"
+>
+
+
+<thead>
+
+<tr>
+
+<th>
+    Amount
+</th>
+
+<th>
+    Date & Time
+</th>
+
+<th>
+    UTR Number
+</th>
+
+<th>
+    Site
+</th>
+
+<th class="no-print">
+    Delete
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="transactionBody">
+
+
+<tr>
+
+
+<td>
+
+<input
+    type="text"
+    name="amount[]"
+    class="amount"
+    placeholder="Amount"
+    oninput="calculateTotal()"
+>
+
+</td>
+
+
+<td>
+
+<input
+    type="text"
+    name="transaction_datetime[]"
+    placeholder="DD/MM/YYYY HH:MM"
+>
+
+</td>
+
+
+<td>
+
+<input
+    type="text"
+    name="utr_number[]"
+    placeholder="UTR Number"
+>
+
+</td>
+
+
+<td>
+
+
+<select
+    class="site-select"
+    onchange="handleSiteChange(this)"
+>
+
+<option value="">
+    Select Site
+</option>
+
+<option value="QUICKNPAY">
+    QUICKNPAY
+</option>
+
+<option value="REMIT PAY">
+    REMIT PAY
+</option>
+
+<option value="SOUL PAY">
+    SOUL PAY
+</option>
+
+<option value="SEKUREPE">
+    SEKUREPE
+</option>
+
+<option value="SPAY INDIA">
+    SPAY INDIA
+</option>
+
+<option value="OTHER">
+    Other
+</option>
+
+</select>
+
+
+<input
+    type="text"
+    class="site-other"
+    placeholder="Enter site manually"
+    style="display:none;"
+    oninput="syncSiteValue(this)"
+>
+
+
+<input
+    type="hidden"
+    name="site[]"
+    class="site-value"
+    value=""
+>
+
+
+</td>
+
+
+<td class="no-print">
+
+<button
+    type="button"
+    class="delete-btn"
+    onclick="deleteRow(this)"
+>
+    🗑️ Delete
+</button>
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+<!-- =========================================
+     ADD TRANSACTION BUTTON
+========================================= -->
+
+<button
+    type="button"
+    class="add-btn no-print"
+    onclick="addRow()"
+>
+    ➕ Add Transaction
+</button>
+
+
+<div class="amount-summary">
+
+
+<div class="in-words">
+
+In Words:
+
+<span id="amountInWords">
+    Zero Rupees Only
+</span>
+
+</div>
+
+
+<div class="total-box">
+
+Total Amount:
+
+<span
+    class="total-amount"
+    id="totalAmount"
+>
+    ₹0.00
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="receipt-note">
+
+<strong>
+    Note:
+</strong>
+
+This is computer generated receipt
+and does not require signature.
+
+</div>
+
+
+<div class="buttons no-print">
+
+
+<button
+    type="submit"
+    class="save-button"
+>
+    💾 Save Transactions
+</button>
+
+
+<button
+    type="button"
+    class="print-button"
+    onclick="window.print()"
+>
+    🖨️ Print
+</button>
+
+
+<a
+    href="{{ url_for('home') }}"
+    class="back-button"
+>
+    ← Back
+</a>
+
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+<!-- =====================================================
+     TRANSACTION HISTORY
+====================================================== -->
+
+<div class="box">
+
+
+<h2>
+    📜 Transaction History
+</h2>
+
+
+{% if history %}
+
+
+{% for batch in history %}
+
+
+<div class="history-item">
+
+
+<div class="history-header">
+
+
+<div>
+
+<div class="history-title">
+
+Transaction #{{ batch["id"] }}
+
+</div>
+
+
+<div class="history-info">
+
+Saved:
+{{ batch["created_at"] }}
+
+<br>
+
+Transactions:
+{{ batch["transactions"]|length }}
+
+</div>
+
+</div>
+
+
+<div>
+
+<div class="history-total">
+
+₹{{ "%.2f"|format(
+    batch["total_amount"] or 0
+) }}
+
+</div>
+
+</div>
+
+
+<div class="history-actions">
+
+
+<a
+    href="{{ url_for(
+        'print_transaction',
+        batch_id=batch['id']
+    ) }}"
+    target="_blank"
+    class="history-print"
+>
+    🖨️ Print
+</a>
+
+
+<a
+    href="{{ url_for(
+        'edit_transaction',
+        batch_id=batch['id']
+    ) }}"
+    class="history-edit"
+>
+    ✏️ Edit
+</a>
+
+
+<form
+    method="POST"
+    action="{{ url_for(
+        'delete_transaction_batch',
+        batch_id=batch['id']
+    ) }}"
+>
+
+
+<button
+    type="submit"
+    class="history-delete"
+    onclick="return confirm(
+        'क्या आप इस पूरी transaction history को delete करना चाहते हैं?'
+    )"
+>
+    🗑️ Delete
+</button>
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+{% else %}
+
+
+<p>
+    अभी कोई Transaction History saved नहीं है।
+</p>
+
+
+{% endif %}
+
+
+</div>
+
+
+{% endif %}
+
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   SITE DROPDOWN
+===================================================== */
+
+function handleSiteChange(select) {
+
+    const cell =
+        select.closest("td");
+
+
+    const other =
+        cell.querySelector(
+            ".site-other"
+        );
+
+
+    const hidden =
+        cell.querySelector(
+            ".site-value"
+        );
+
+
+    if (
+        select.value ===
+        "OTHER"
+    ) {
+
+        other.style.display =
+            "block";
+
+        other.focus();
+
+        hidden.value =
+            other.value;
+
+    }
+
+    else {
+
+        other.style.display =
+            "none";
+
+        other.value = "";
+
+        hidden.value =
+            select.value;
+
+    }
+
+}
+
+
+/* =====================================================
+   OTHER SITE MANUAL VALUE
+===================================================== */
+
+function syncSiteValue(input) {
+
+    const cell =
+        input.closest("td");
+
+
+    const hidden =
+        cell.querySelector(
+            ".site-value"
+        );
+
+
+    hidden.value =
+        input.value;
+
+}
+
+
+/* =====================================================
+   ADD NEW TRANSACTION ROW
+===================================================== */
+
+function addRow() {
+
+    const tbody =
+        document.getElementById(
+            "transactionBody"
+        );
+
+
+    const row =
+        document.createElement("tr");
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <input
+                type="text"
+                name="amount[]"
+                class="amount"
+                placeholder="Amount"
+                oninput="calculateTotal()"
+            >
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="text"
+                name="transaction_datetime[]"
+                placeholder="DD/MM/YYYY HH:MM"
+            >
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="text"
+                name="utr_number[]"
+                placeholder="UTR Number"
+            >
+
+        </td>
+
+
+        <td>
+
+            <select
+                class="site-select"
+                onchange="handleSiteChange(this)"
+            >
+
+                <option value="">
+                    Select Site
+                </option>
+
+                <option value="QUICKNPAY">
+                    QUICKNPAY
+                </option>
+
+                <option value="REMIT PAY">
+                    REMIT PAY
+                </option>
+
+                <option value="SOUL PAY">
+                    SOUL PAY
+                </option>
+
+                <option value="SEKUREPE">
+                    SEKUREPE
+                </option>
+
+                <option value="SPAY INDIA">
+                    SPAY INDIA
+                </option>
+
+                <option value="OTHER">
+                    Other
+                </option>
+
+            </select>
+
+
+            <input
+                type="text"
+                class="site-other"
+                placeholder="Enter site manually"
+                style="display:none;"
+                oninput="syncSiteValue(this)"
+            >
+
+
+            <input
+                type="hidden"
+                name="site[]"
+                class="site-value"
+                value=""
+            >
+
+        </td>
+
+
+        <td class="no-print">
+
+            <button
+                type="button"
+                class="delete-btn"
+                onclick="deleteRow(this)"
+            >
+                🗑️ Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    tbody.appendChild(row);
+
+
+    calculateTotal();
+
+}
+
+
+/* =====================================================
+   DELETE NEW ROW
+===================================================== */
+
+function deleteRow(button) {
+
+    const tbody =
+        document.getElementById(
+            "transactionBody"
+        );
+
+
+    if (
+        tbody.rows.length <= 1
+    ) {
+
+        alert(
+            "कम से कम एक row रखें।"
+        );
+
+        return;
+
+    }
+
+
+    button
+        .closest("tr")
+        .remove();
+
+
+    calculateTotal();
+
+}
+
+
+/* =====================================================
+   NUMBER TO WORDS
+===================================================== */
+
+function numberToWords(num) {
+
+    num = Math.floor(
+        Number(num)
+    );
+
+
+    if (num === 0) {
+
+        return "Zero";
+
+    }
+
+
+    const ones = [
+
+        "",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Eleven",
+        "Twelve",
+        "Thirteen",
+        "Fourteen",
+        "Fifteen",
+        "Sixteen",
+        "Seventeen",
+        "Eighteen",
+        "Nineteen"
+
+    ];
+
+
+    const tens = [
+
+        "",
+        "",
+        "Twenty",
+        "Thirty",
+        "Forty",
+        "Fifty",
+        "Sixty",
+        "Seventy",
+        "Eighty",
+        "Ninety"
+
+    ];
+
+
+    function twoDigits(n) {
+
+        if (n < 20) {
+
+            return ones[n];
+
+        }
+
+
+        return tens[
+            Math.floor(n / 10)
+        ] +
+
+        (
+
+            n % 10
+
+                ? " " + ones[n % 10]
+
+                : ""
+
+        );
+
+    }
+
+
+    function threeDigits(n) {
+
+        let result = "";
+
+
+        if (n >= 100) {
+
+            result +=
+
+                ones[
+                    Math.floor(n / 100)
+                ]
+
+                + " Hundred";
+
+
+            n %= 100;
+
+
+            if (n > 0) {
+
+                result += " ";
+
+            }
+
+        }
+
+
+        if (n > 0) {
+
+            result +=
+                twoDigits(n);
+
+        }
+
+
+        return result;
+
+    }
+
+
+    let result = "";
+
+
+    let crore =
+
+        Math.floor(
+            num / 10000000
+        );
+
+
+    num %= 10000000;
+
+
+    let lakh =
+
+        Math.floor(
+            num / 100000
+        );
+
+
+    num %= 100000;
+
+
+    let thousand =
+
+        Math.floor(
+            num / 1000
+        );
+
+
+    num %= 1000;
+
+
+    if (crore > 0) {
+
+        result +=
+
+            threeDigits(crore)
+
+            + " Crore ";
+
+    }
+
+
+    if (lakh > 0) {
+
+        result +=
+
+            threeDigits(lakh)
+
+            + " Lakh ";
+
+    }
+
+
+    if (thousand > 0) {
+
+        result +=
+
+            threeDigits(thousand)
+
+            + " Thousand ";
+
+    }
+
+
+    if (num > 0) {
+
+        result +=
+            threeDigits(num);
+
+    }
+
+
+    return result.trim();
+
+}
+
+
+/* =====================================================
+   TOTAL
+===================================================== */
+
+function calculateTotal() {
+
+    const amounts =
+        document.querySelectorAll(
+            ".amount"
+        );
+
+
+    let total = 0;
+
+
+    amounts.forEach(
+        function(input) {
+
+            let value =
+                parseFloat(
+                    input.value
+                );
+
+
+            if (!isNaN(value)) {
+
+                total += value;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalAmount"
+    ).innerText =
+        "₹" + total.toFixed(2);
+
+
+    document.getElementById(
+        "amountInWords"
+    ).innerText =
+        numberToWords(total)
+        + " Rupees Only";
+
+}
+
+
+/* Initial calculation */
+
+calculateTotal();
+
+</script>
+
+
+</body>
+
+</html>
