@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Capital Management</title>
 
@@ -18,141 +18,281 @@
 
         body {
             margin: 0;
-            padding: 30px;
-            background: #f4f6f8;
-            font-family: Arial, sans-serif;
+            padding: 25px;
+            background: white;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 1200px;
             margin: auto;
         }
 
-        .box {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        h1 {
-            text-align: center;
-            color: #1f2937;
-            margin-bottom: 25px;
+        .title {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
         }
 
-        /* =========================
-           CURRENT CAPITAL
-        ========================= */
+        .back-btn {
+            text-decoration: none;
+            background: #333;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: #111;
+        }
 
         .capital-card {
-            text-align: center;
-            background: #ecfdf5;
-            border: 2px solid #16a34a;
-            padding: 30px;
-            border-radius: 12px;
+            background: rgb(236, 240, 241);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
             margin-bottom: 25px;
         }
 
-        .capital-title {
+        .capital-balance {
+            background: white;
+            border: 1px solid #e3e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .capital-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .capital-value {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .form-title {
             font-size: 20px;
-            font-weight: bold;
-            color: #374151;
+            margin: 0 0 18px 0;
         }
 
-        .capital-amount {
-            font-size: 42px;
-            font-weight: bold;
-            color: #16a34a;
-            margin-top: 15px;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
         }
-
-        /* =========================
-           FORM
-        ========================= */
 
         .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
         }
 
         label {
-            display: block;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 600;
             margin-bottom: 7px;
-            color: #374151;
         }
 
-        input {
+        input,
+        select,
+        textarea {
             width: 100%;
-            padding: 13px;
-            border: 1px solid #d1d5db;
+            border: 1px solid #ccd2d8;
             border-radius: 7px;
-            font-size: 16px;
-        }
-
-        input:focus {
+            padding: 12px;
+            font-size: 15px;
             outline: none;
-            border-color: #16a34a;
-            box-shadow: 0 0 0 2px rgba(22,163,74,0.12);
+            background: white;
         }
 
-        /* =========================
-           SAVE BUTTON
-        ========================= */
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #333;
+        }
 
-        .save-button {
-            width: 100%;
-            padding: 14px;
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .help-text {
+            margin-top: 5px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .submit-row {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .save-btn {
             border: none;
-            border-radius: 7px;
-            background: #16a34a;
+            background: #111;
             color: white;
-            font-size: 17px;
-            font-weight: bold;
+            padding: 12px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .save-btn:hover {
+            background: #333;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            background: #e9ecef;
+            color: #222;
+            padding: 12px 22px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .history-card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .history-title {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f5f6f7;
+            font-size: 13px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .amount-cell {
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .payment-type {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 5px;
+            background: #f0f0f0;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .remarks-cell {
+            max-width: 250px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .edit-btn {
+            text-decoration: none;
+            background: #333;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .delete-btn {
+            border: none;
+            background: #c62828;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 5px;
+            font-size: 12px;
             cursor: pointer;
         }
 
-        .save-button:hover {
-            background: #15803d;
+        .delete-btn:hover {
+            background: #a91f1f;
         }
 
-        /* =========================
-           BACK BUTTON
-        ========================= */
-
-        .back-button {
-            display: block;
+        .empty {
             text-align: center;
-            padding: 13px;
-            background: #6b7280;
-            color: white;
-            text-decoration: none;
-            border-radius: 7px;
-            margin-top: 15px;
-            font-weight: bold;
+            color: #777;
+            padding: 30px;
         }
 
-        .back-button:hover {
-            background: #4b5563;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media(max-width:600px) {
+        @media (max-width: 700px) {
 
             body {
                 padding: 15px;
             }
 
-            .box {
-                padding: 20px;
+            .form-grid {
+                grid-template-columns: 1fr;
             }
 
-            .capital-amount {
-                font-size: 32px;
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .title {
+                font-size: 23px;
+            }
+
+            .capital-value {
+                font-size: 27px;
             }
 
         }
@@ -161,102 +301,519 @@
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
+    <!-- TOP BAR -->
 
-    <div class="box">
+    <div class="top-bar">
+
+        <h1 class="title">Capital Management</h1>
+
+        <a href="{{ url_for('home') }}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
 
 
-        <h1>
-            💰 Capital Management
-        </h1>
+    <!-- CURRENT CAPITAL -->
 
+    <div class="capital-card">
 
-        <!-- =========================
-             CURRENT CAPITAL
-        ========================= -->
+        <div class="capital-balance">
 
-        <div class="capital-card">
-
-            <div class="capital-title">
+            <div class="capital-label">
                 Current Capital
             </div>
 
-
-            <div class="capital-amount">
-
-                ₹ {{ "%.2f"|format(capital|default(0)|float) }}
-
+            <div class="capital-value">
+                ₹{{ "%.2f"|format(capital|float) }}
             </div>
 
         </div>
 
 
-        <!-- =========================
-             SET CAPITAL
-        ========================= -->
+        {% if edit_history %}
 
-        <form
-            action="{{ url_for('capital_page') }}"
-            method="POST"
-        >
+        <!-- EDIT CAPITAL -->
+
+        <h2 class="form-title">
+            Edit Capital Entry
+        </h2>
+
+        <form method="POST"
+              action="{{ url_for('edit_capital', history_id=edit_history['id']) }}">
+
+            <div class="form-grid">
+
+                <!-- AMOUNT -->
+
+                <div class="form-group">
+
+                    <label for="amount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        step="0.01"
+                        min="0"
+                        value="{{ edit_history['amount'] }}"
+                        required
+                    >
+
+                </div>
 
 
-            <div class="form-group">
+                <!-- PAYMENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="payment_type">
+                        Payment Type
+                    </label>
+
+                    <select
+                        id="payment_type"
+                        name="payment_type"
+                        required
+                    >
+
+                        <option value="">
+                            Select Payment Type
+                        </option>
+
+                        <option value="PAID BALANCE"
+                            {% if edit_history['payment_type'] == 'PAID BALANCE' %}selected{% endif %}>
+                            PAID BALANCE
+                        </option>
+
+                        <option value="CREDIT BALANCE"
+                            {% if edit_history['payment_type'] == 'CREDIT BALANCE' %}selected{% endif %}>
+                            CREDIT BALANCE
+                        </option>
+
+                        <option value="ADVANCE BALANCE"
+                            {% if edit_history['payment_type'] == 'ADVANCE BALANCE' %}selected{% endif %}>
+                            ADVANCE BALANCE
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-                <label>
-                    Set / Update Capital
-                </label>
+                <!-- DATE & TIME MANUAL -->
+
+                <div class="form-group">
+
+                    <label for="transaction_datetime">
+                        Date & Time
+                    </label>
+
+                    <input
+                        type="text"
+                        id="transaction_datetime"
+                        name="transaction_datetime"
+                        value="{{ edit_history['transaction_datetime'] }}"
+                        placeholder="DD/MM/YYYY HH:MM"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <div class="help-text">
+                        Example: 28/08/2026 19:30
+                    </div>
+
+                </div>
 
 
-                <input
-                    type="number"
-                    name="capital"
-                    step="0.01"
-                    min="0"
-                    value="{{ capital|default(0) }}"
-                    placeholder="Enter Capital"
-                    required
-                >
+                <!-- SITE -->
 
+                <div class="form-group">
+
+                    <label for="site">
+                        Site
+                    </label>
+
+                    <select
+                        id="site"
+                        name="site"
+                        required
+                    >
+
+                        <option value="">
+                            Select site
+                        </option>
+
+                        <option value="QUICKNPAY"
+                            {% if edit_history['site'] == 'QUICKNPAY' %}selected{% endif %}>
+                            QUICKNPAY
+                        </option>
+
+                        <option value="SOUL PAY"
+                            {% if edit_history['site'] == 'SOUL PAY' %}selected{% endif %}>
+                            SOUL PAY
+                        </option>
+
+                        <option value="REMIT PAY"
+                            {% if edit_history['site'] == 'REMIT PAY' %}selected{% endif %}>
+                            REMIT PAY
+                        </option>
+
+                        <option value="SEKUREPE"
+                            {% if edit_history['site'] == 'SEKUREPE' %}selected{% endif %}>
+                            SEKUREPE
+                        </option>
+
+                        <option value="SPAY INDIA"
+                            {% if edit_history['site'] == 'SPAY INDIA' %}selected{% endif %}>
+                            SPAY INDIA
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- REMARKS -->
+
+                <div class="form-group full">
+
+                    <label for="remarks">
+                        Remarks
+                    </label>
+
+                    <textarea
+                        id="remarks"
+                        name="remarks"
+                        placeholder="Enter remarks"
+                    >{{ edit_history['remarks'] or '' }}</textarea>
+
+                </div>
 
             </div>
 
 
-            <button
-                type="submit"
-                class="save-button"
-            >
-                💾 Save Capital
-            </button>
-            
+            <div class="submit-row">
 
+                <button type="submit" class="save-btn">
+                    Update Capital
+                </button>
+
+                <a href="{{ url_for('capital_page') }}"
+                   class="cancel-btn">
+                    Cancel
+                </a>
+
+            </div>
 
         </form>
 
 
-        <!-- =========================
-             BACK
-        ========================= -->
+        {% else %}
 
-        <a
-            href="/"
-            class="back-button"
-        >
-            ⬅️ Back to Main Page
-        </a>
+        <!-- ADD CAPITAL -->
 
+        <h2 class="form-title">
+            Add Capital
+        </h2>
+
+        <form method="POST"
+              action="{{ url_for('add_capital') }}">
+
+            <div class="form-grid">
+
+                <!-- AMOUNT -->
+
+                <div class="form-group">
+
+                    <label for="add_capital">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="add_capital"
+                        name="add_capital"
+                        step="0.01"
+                        min="0.01"
+                        placeholder="Enter amount"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PAYMENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="payment_type">
+                        Payment Type
+                    </label>
+
+                    <select
+                        id="payment_type"
+                        name="payment_type"
+                        required
+                    >
+
+                        <option value="">
+                            Select Payment Type
+                        </option>
+
+                        <option value="PAID BALANCE">
+                            PAID BALANCE
+                        </option>
+
+                        <option value="CREDIT BALANCE">
+                            CREDIT BALANCE
+                        </option>
+
+                        <option value="ADVANCE BALANCE">
+                            ADVANCE BALANCE
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATE & TIME MANUAL -->
+
+                <div class="form-group">
+
+                    <label for="transaction_datetime">
+                        Date & Time
+                    </label>
+
+                    <input
+                        type="text"
+                        id="transaction_datetime"
+                        name="transaction_datetime"
+                        placeholder="DD/MM/YYYY HH:MM"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <div class="help-text">
+                        Example: 28/08/2026 19:30
+                    </div>
+
+                </div>
+
+
+                <!-- SITE -->
+
+                <div class="form-group">
+
+                    <label for="site">
+                        Site
+                    </label>
+
+                    <select
+                        id="site"
+                        name="site"
+                        required
+                    >
+
+                        <option value="">
+                            Select site
+                        </option>
+
+                        <option value="QUICKNPAY">
+                            QUICKNPAY
+                        </option>
+
+                        <option value="REMIT PAY">
+                            REMIT PAY
+                        </option>
+
+                        <option value="SOUL PAY">
+                            SOUL PAY
+                        </option>
+
+                        <option value="SEKUREPE">
+                            SEKUREPE
+                        </option>
+
+                        <option value="SPAY INDIA">
+                            SPAY INDIA
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- REMARKS -->
+
+                <div class="form-group full">
+
+                    <label for="remarks">
+                        Remarks
+                    </label>
+
+                    <textarea
+                        id="remarks"
+                        name="remarks"
+                        placeholder="Enter remarks"
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="submit-row">
+
+                <button type="submit" class="save-btn">
+                    Add Capital
+                </button>
+
+            </div>
+
+        </form>
+
+        {% endif %}
 
     </div>
 
 
-</div>
+    <!-- CAPITAL HISTORY -->
 
+    <div class="history-card">
+
+        <div class="history-header">
+
+            <h2 class="history-title">
+                Capital History
+            </h2>
+
+        </div>
+
+
+        {% if capital_history %}
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Amount</th>
+
+                        <th>Payment Type</th>
+
+                        <th>Date & Time</th>
+
+                        <th>Site</th>
+
+                        <th>Remarks</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for row in capital_history %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td class="amount-cell">
+                            ₹{{ "%.2f"|format(row['amount']|float) }}
+                        </td>
+
+                        <td>
+
+                            <span class="payment-type">
+                                {{ row['payment_type'] or '-' }}
+                            </span>
+
+                        </td>
+
+                        <td>
+                            {{ row['transaction_datetime'] or '-' }}
+                        </td>
+
+                        <td>
+                            {{ row['site'] or '-' }}
+                        </td>
+
+                        <td class="remarks-cell">
+                            {{ row['remarks'] or '-' }}
+                        </td>
+
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a
+                                    href="{{ url_for('edit_capital', history_id=row['id']) }}"
+                                    class="edit-btn"
+                                >
+                                    Edit
+                                </a>
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('delete_capital', history_id=row['id']) }}"
+                                    onsubmit="return confirm('Are you sure you want to delete this capital entry?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            No capital history found.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
 
 </body>
 

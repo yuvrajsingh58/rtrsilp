@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ledger Statement</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 25px;
+
+            background: #f1f5f9;
+
+            font-family: Arial, sans-serif;
+
+            color: #111827;
+        }
+
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.08);
+
+            margin-bottom: 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .header h1 {
+
+            margin: 0;
+
+            color: #7c3aed;
+        }
+
+
+        .back-button {
+
+            background: #374151;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 11px 18px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+
+        .back-button:hover {
+
+            background: #1f2937;
+        }
+
+
+        /* =========================
+           SEARCH BOX
+        ========================= */
+
+        .box {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.08);
+
+            margin-bottom: 20px;
+        }
+
+
+        .box h2 {
+
+            margin-top: 0;
+
+            color: #7c3aed;
+        }
+
+
+        .search-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            gap: 15px;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            background: white;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: none;
+
+            border-color: #7c3aed;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(124,58,237,0.10);
+        }
+
+
+        .search-button {
+
+            margin-top: 18px;
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #7c3aed;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .search-button:hover {
+
+            background: #6d28d9;
+        }
+
+
+        /* =========================
+           CUSTOMER DETAILS
+        ========================= */
+
+        .customer-details {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .detail-card {
+
+            background: #f8fafc;
+
+            padding: 16px;
+
+            border-radius: 9px;
+
+            border-left:
+                4px solid #7c3aed;
+        }
+
+
+        .detail-title {
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .detail-value {
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .summary-card {
+
+            background: #f8fafc;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            text-align: center;
+        }
+
+
+        .summary-title {
+
+            color: #6b7280;
+
+            margin-bottom: 7px;
+        }
+
+
+        .summary-value {
+
+            font-size: 26px;
+
+            font-weight: bold;
+
+            color: #7c3aed;
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 800px;
+        }
+
+
+        th {
+
+            background: #7c3aed;
+
+            color: white;
+
+            padding: 13px;
+
+            text-align: left;
+        }
+
+
+        td {
+
+            padding: 12px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+
+        tr:hover {
+
+            background: #f8fafc;
+        }
+
+
+        .amount {
+
+            font-weight: bold;
+
+            color: #dc2626;
+        }
+
+
+        .running {
+
+            font-weight: bold;
+
+            color: #7c3aed;
+        }
+
+
+        .no-data {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #6b7280;
+        }
+
+
+        /* =========================
+           PRINT
+        ========================= */
+
+        .print-button {
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            padding: 11px 18px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .print-button:hover {
+
+            background: #1d4ed8;
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:800px) {
+
+            body {
+
+                padding: 12px;
+            }
+
+
+            .header {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                text-align: center;
+            }
+
+
+            .search-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .customer-details {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .summary {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        /* =========================
+           PRINT CSS
+        ========================= */
+
+        @media print {
+
+            body {
+
+                background: white;
+
+                padding: 0;
+            }
+
+
+            .header {
+
+                box-shadow: none;
+
+                border-bottom:
+                    2px solid #111827;
+            }
+
+
+            .back-button,
+            .search-box,
+            .print-button,
+            .actions {
+
+                display: none !important;
+            }
+
+
+            .box {
+
+                box-shadow: none;
+
+                border: 1px solid #ddd;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+
+            📒 Ledger Statement
+
+        </h1>
+
+
+        <a
+            href="/"
+            class="back-button"
+        >
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         SEARCH
+    ========================= -->
+
+    <div class="box search-box">
+
+        <h2>
+
+            🔎 Find Account Ledger
+
+        </h2>
+
+
+        <form
+            method="GET"
+            action="/ledger"
+        >
+
+
+            <div class="search-grid">
+
+
+                <!-- ACCOUNT -->
+
+                <div>
+
+                    <label>
+
+                        Account Number
+
+                    </label>
+
+
+                    <select
+                        name="account_number"
+                        required
+                    >
+
+                        <option value="">
+
+                            -- Select Account --
+
+                        </option>
+
+
+                        {% for item in customers %}
+
+                        <option
+                            value="{{ item['account_number'] }}"
+                            {% if account_number == item['account_number'] %}
+                            selected
+                            {% endif %}
+                        >
+
+                            {{ item['account_number'] }}
+                            -
+                            {{ item['name'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- FROM DATE -->
+
+                <div>
+
+                    <label>
+
+                        From Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        name="from_date"
+                        value="{{ from_date }}"
+                    >
+
+                </div>
+
+
+                <!-- TO DATE -->
+
+                <div>
+
+                    <label>
+
+                        To Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        name="to_date"
+                        value="{{ to_date }}"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="search-button"
+            >
+
+                📒 View Ledger
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    {% if customer %}
+
+
+    <!-- =========================
+         CUSTOMER DETAILS
+    ========================= -->
+
+    <div class="box">
+
+        <h2>
+
+            👤 Account Details
+
+        </h2>
+
+
+        <div class="customer-details">
+
+
+            <div class="detail-card">
+
+                <div class="detail-title">
+
+                    Account Number
+
+                </div>
+
+                <div class="detail-value">
+
+                    {{ customer["account_number"] }}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-title">
+
+                    Customer Name
+
+                </div>
+
+                <div class="detail-value">
+
+                    {{ customer["name"] }}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-title">
+
+                    Mobile Number
+
+                </div>
+
+                <div class="detail-value">
+
+                    {{ customer["mobile"] or "-" }}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-title">
+
+                    Bank Name
+
+                </div>
+
+                <div class="detail-value">
+
+                    {{ customer["bank_name"] or "-" }}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-title">
+
+                    IFSC Code
+
+                </div>
+
+                <div class="detail-value">
+
+                    {{ customer["ifsc_code"] or "-" }}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-title">
+
+                    Statement Period
+
+                </div>
+
+                <div class="detail-value">
+
+                    {% if from_date %}
+
+                        {{ from_date }}
+
+                    {% else %}
+
+                        Beginning
+
+                    {% endif %}
+
+                    →
+
+                    {% if to_date %}
+
+                        {{ to_date }}
+
+                    {% else %}
+
+                        Today
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SUMMARY
+    ========================= -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+
+                Total Transactions
+
+            </div>
+
+
+            <div class="summary-value">
+
+                {{ transactions|length }}
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+
+                Total Amount
+
+            </div>
+
+
+            <div class="summary-value">
+
+                ₹{{ "%.2f"|format(total_amount) }}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         LEDGER TABLE
+    ========================= -->
+
+    <div class="box">
+
+        <div class="actions">
+
+            <button
+                class="print-button"
+                onclick="window.print()"
+            >
+
+                🖨️ Print Ledger
+
+            </button>
+
+        </div>
+
+
+        <div class="table-container">
+
+
+            {% if transactions %}
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            UTR Number
+                        </th>
+
+                        <th>
+                            Site
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Running Total
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                {% set running_total = 0 %}
+
+
+                {% for transaction in transactions %}
+
+
+                    {% set running_total =
+                        running_total +
+                        (transaction["amount"] or 0)
+                    %}
+
+
+                    <tr>
+
+
+                        <td>
+
+                            {{ loop.index }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ transaction["transaction_datetime"] or "-" }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ transaction["utr_number"] or "-" }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ transaction["site"] or "-" }}
+
+                        </td>
+
+
+                        <td class="amount">
+
+                            ₹{{ "%.2f"|format(
+                                transaction["amount"] or 0
+                            ) }}
+
+                        </td>
+
+
+                        <td class="running">
+
+                            ₹{{ "%.2f"|format(
+                                running_total
+                            ) }}
+
+                        </td>
+
+
+                    </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+                <tfoot>
+
+                    <tr>
+
+                        <th colspan="4">
+
+                            Total
+
+                        </th>
+
+
+                        <th class="amount">
+
+                            ₹{{ "%.2f"|format(
+                                total_amount
+                            ) }}
+
+                        </th>
+
+
+                        <th class="running">
+
+                            ₹{{ "%.2f"|format(
+                                total_amount
+                            ) }}
+
+                        </th>
+
+                    </tr>
+
+                </tfoot>
+
+
+            </table>
+
+
+            {% else %}
+
+
+            <div class="no-data">
+
+                📭 No transactions found for this account/date range.
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+
+    {% elif account_number %}
+
+
+    <div class="box">
+
+        <div class="no-data">
+
+            ❌ Account not found.
+
+        </div>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>

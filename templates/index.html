@@ -31,7 +31,7 @@
 
             padding: 30px;
 
-            background: #f4f6f8;
+            background: #58fcd3;
 
             font-family: Arial, sans-serif;
         }
@@ -182,7 +182,30 @@
                 0 7px 20px
                 rgba(22, 163, 74, 0.20);
         }
+        /* =========================
+   LEDGER CARD
+========================= */
 
+.ledger-card {
+
+    cursor: pointer;
+}
+
+
+.ledger-card .card-number {
+
+    color: #7c3aed;
+}
+
+
+.ledger-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 20px
+        rgba(124, 58, 237, 0.20);
+}
 
         /* =========================
            BOX
@@ -759,6 +782,35 @@
             </div>
 
         </div>
+        <!-- LEDGER STATEMENT -->
+
+<div
+    class="card clickable-card ledger-card"
+    onclick="goToLedger()"
+    title="View Ledger Statement"
+>
+
+    <div class="card-icon">
+
+        📒
+
+    </div>
+
+
+    <div class="card-number">
+
+        Ledger
+
+    </div>
+
+
+    <div class="card-title">
+
+        Ledger Statement
+
+    </div>
+
+</div>
 
 
     </div>
@@ -911,6 +963,12 @@
                         data-ifsc="BKID0000150"
                     >
                         Bank of India
+                    </option>
+                    <option
+                        value="FINO PAYMENTS BANK"
+                        data-ifsc="FINO0001089"
+                    >
+                        FINO PAYMENTS BANK
                     </option>
 
 
@@ -1846,7 +1904,16 @@
             "/capital";
 
     }
+/* =========================
+   LEDGER
+========================= */
 
+function goToLedger() {
+
+    window.location.href =
+        "/ledger";
+
+}
 
 </script>
 
