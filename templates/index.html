@@ -20,6 +20,43 @@
         }
 
 
+        .flash-message {
+
+            padding: 14px 18px;
+
+            border-radius: 8px;
+
+            margin-bottom: 18px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+        }
+
+
+        .flash-error {
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fca5a5;
+
+        }
+
+
+        .flash-success {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border: 1px solid #86efac;
+
+        }
+
+
         html {
             scroll-behavior: smooth;
         }
@@ -635,6 +672,71 @@
 <div class="container">
 
 
+    <!-- TOP BAR -->
+
+    <div
+        style="
+            display:flex;
+            justify-content:flex-end;
+            gap:10px;
+            margin-bottom:10px;
+            flex-wrap:wrap;
+        "
+    >
+
+        <a
+            href="{{ url_for('change_password') }}"
+            style="
+                padding:8px 14px;
+                background:#6b7280;
+                color:white;
+                text-decoration:none;
+                border-radius:6px;
+                font-size:13px;
+            "
+        >
+            🔑 Change Password
+        </a>
+
+        <a
+            href="{{ url_for('logout') }}"
+            style="
+                padding:8px 14px;
+                background:#ef4444;
+                color:white;
+                text-decoration:none;
+                border-radius:6px;
+                font-size:13px;
+            "
+        >
+            🚪 Logout
+        </a>
+
+    </div>
+
+
+    <!-- FLASH MESSAGES -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+            <div class="flash-message flash-{{ category }}">
+
+                {% if category == 'error' %}⚠️{% else %}✅{% endif %}
+                {{ message }}
+
+            </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
     <!-- TITLE -->
 
     <h1>
@@ -807,6 +909,61 @@
     <div class="card-title">
 
         Ledger Statement
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE RECHARGE -->
+
+<div
+    class="card clickable-card recharge-card"
+    onclick="goToRecharge()"
+    title="Mobile Recharge"
+>
+
+    <div class="card-icon">
+
+        📱
+
+    </div>
+
+
+    <div class="card-number">
+
+        ₹{{ "%.2f"|format(today_recharge_amount|default(0)) }}
+
+    </div>
+
+
+    <div class="card-title">
+
+        Mobile Recharge
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD / ANALYTICS -->
+
+<div
+    class="card clickable-card"
+    onclick="goToDashboard()"
+    title="Dashboard - Analytics"
+>
+
+    <div class="card-icon">
+
+        📊
+
+    </div>
+
+
+    <div class="card-title">
+
+        Dashboard
 
     </div>
 
@@ -1912,6 +2069,22 @@ function goToLedger() {
 
     window.location.href =
         "/ledger";
+
+}
+
+
+function goToRecharge() {
+
+    window.location.href =
+        "/recharge";
+
+}
+
+
+function goToDashboard() {
+
+    window.location.href =
+        "/dashboard";
 
 }
 

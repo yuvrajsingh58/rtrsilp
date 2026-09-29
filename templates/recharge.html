@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mobile Recharge</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 30px;
+
+            background: #f4f6f8;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+
+        .container {
+
+            max-width: 950px;
+
+            margin: auto;
+
+        }
+
+
+        .box {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.10);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            font-size: 26px;
+
+        }
+
+
+        .top-bar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+        }
+
+
+        .back-link {
+
+            padding: 10px 16px;
+
+            background: #6b7280;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+        }
+
+
+        .capital-badge {
+
+            padding: 10px 18px;
+
+            background: #10b981;
+
+            color: white;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+        }
+
+
+        input, textarea, select {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+        }
+
+
+        .operator-picker {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .operator-option {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 10px 14px;
+
+            border: 2px solid #e5e7eb;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #374151;
+
+            transition: 0.15s;
+
+        }
+
+
+        .operator-option.selected {
+
+            border-color: #8b5cf6;
+
+            background: #f5f3ff;
+
+        }
+
+
+        .operator-logo {
+
+            width: 26px;
+
+            height: 26px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .logo-jio {
+            background: #0a2885;
+        }
+
+
+        .logo-airtel {
+            background: #e40000;
+        }
+
+
+        .logo-vi {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ee0979,
+                    #6a11cb
+                );
+        }
+
+
+        .logo-bsnl {
+            background: #f57c00;
+        }
+
+
+        .logo-other {
+            background: #6b7280;
+        }
+
+
+        .operator-badge-small {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            font-size: 13px;
+
+        }
+
+
+        .save-button {
+
+            grid-column: 1 / -1;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #8b5cf6;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+
+        .cancel-link {
+
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 10px;
+
+            background: #6b7280;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 14px;
+
+        }
+
+
+        thead th {
+
+            background: #111827;
+
+            color: white;
+
+            padding: 12px 10px;
+
+            text-align: left;
+
+            white-space: nowrap;
+
+        }
+
+
+        tbody td {
+
+            padding: 12px 10px;
+
+            border-bottom: 1px solid #e5e7eb;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #f9fafb;
+
+        }
+
+
+        .amount-cell {
+
+            color: #dc2626;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+        }
+
+
+        .action-buttons {
+
+            display: flex;
+
+            gap: 8px;
+
+        }
+
+
+        .edit-btn, .delete-btn {
+
+            padding: 6px 12px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            color: white;
+
+        }
+
+
+        .edit-btn {
+            background: #f59e0b;
+        }
+
+
+        .delete-btn {
+            background: #ef4444;
+        }
+
+
+        .no-data {
+
+            text-align: center;
+
+            padding: 40px;
+
+            color: #6b7280;
+
+        }
+
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="box">
+
+
+        <div class="top-bar">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="back-link"
+            >
+                ⬅️ Back to Home
+            </a>
+
+            <div class="capital-badge">
+                💰 Capital: ₹{{ "%.2f"|format(capital) }}
+            </div>
+
+        </div>
+
+
+        <h1>
+            📱 Mobile Recharge
+        </h1>
+
+
+        {% if edit_recharge %}
+
+        <!-- EDIT FORM -->
+
+        <form
+            action="{{ url_for(
+                'edit_recharge',
+                recharge_id=edit_recharge['id']
+            ) }}"
+            method="POST"
+            class="form-grid"
+        >
+
+            <div class="form-group">
+
+                <label>Mobile Number</label>
+
+                <input
+                    type="text"
+                    name="mobile_number"
+                    value="{{ edit_recharge['mobile_number'] }}"
+                    required
+                >
+
+            </div>
+
+
+            <div
+                class="form-group"
+                style="grid-column: 1 / -1;"
+            >
+
+                <label>Operator</label>
+
+                <div
+                    class="operator-picker"
+                    id="operatorPickerEdit"
+                >
+
+                    <div
+                        class="operator-option"
+                        data-value="Jio"
+                        onclick="selectOperator(this, 'operatorPickerEdit', 'operatorHiddenEdit', 'otherOperatorEdit')"
+                    >
+                        <div class="operator-logo logo-jio">Jio</div>
+                        Jio
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="Airtel"
+                        onclick="selectOperator(this, 'operatorPickerEdit', 'operatorHiddenEdit', 'otherOperatorEdit')"
+                    >
+                        <div class="operator-logo logo-airtel">A</div>
+                        Airtel
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="Vi"
+                        onclick="selectOperator(this, 'operatorPickerEdit', 'operatorHiddenEdit', 'otherOperatorEdit')"
+                    >
+                        <div class="operator-logo logo-vi">Vi</div>
+                        Vi
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="BSNL"
+                        onclick="selectOperator(this, 'operatorPickerEdit', 'operatorHiddenEdit', 'otherOperatorEdit')"
+                    >
+                        <div class="operator-logo logo-bsnl">BS</div>
+                        BSNL
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="Other"
+                        onclick="selectOperator(this, 'operatorPickerEdit', 'operatorHiddenEdit', 'otherOperatorEdit')"
+                    >
+                        <div class="operator-logo logo-other">?</div>
+                        Other
+                    </div>
+
+                </div>
+
+                <input
+                    type="text"
+                    id="otherOperatorEdit"
+                    placeholder="Operator ka naam likhein"
+                    style="display:none; margin-top:8px;"
+                    oninput="document.getElementById('operatorHiddenEdit').value = this.value;"
+                >
+
+                <input
+                    type="hidden"
+                    name="operator"
+                    id="operatorHiddenEdit"
+                    value="{{ edit_recharge['operator'] or '' }}"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Circle</label>
+
+                <select name="circle">
+
+                    <option value="">-- Select Circle --</option>
+
+                    {% for circle_name in [
+                        "Delhi", "Mumbai", "Kolkata", "Chennai",
+                        "Andhra Pradesh", "Assam", "Bihar & Jharkhand",
+                        "Gujarat", "Haryana", "Himachal Pradesh",
+                        "Jammu & Kashmir", "Karnataka", "Kerala",
+                        "Madhya Pradesh & Chhattisgarh",
+                        "Maharashtra & Goa", "North East", "Odisha",
+                        "Punjab", "Rajasthan", "Tamil Nadu",
+                        "UP East", "UP West", "West Bengal"
+                    ] %}
+
+                    <option
+                        value="{{ circle_name }}"
+                        {% if edit_recharge['circle'] == circle_name %}selected{% endif %}
+                    >
+                        {{ circle_name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Amount (₹)</label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0.01"
+                    name="amount"
+                    value="{{ edit_recharge['amount'] }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Date & Time</label>
+
+                <input
+                    type="text"
+                    name="transaction_datetime"
+                    value="{{ edit_recharge['transaction_datetime'] }}"
+                    placeholder="DD/MM/YYYY HH:MM"
+                    required
+                >
+
+            </div>
+
+
+            <div
+                class="form-group"
+                style="grid-column: 1 / -1;"
+            >
+
+                <label>Remarks</label>
+
+                <textarea
+                    name="remarks"
+                    rows="2"
+                >{{ edit_recharge['remarks'] or '' }}</textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                ✅ Update Recharge
+            </button>
+
+
+            <a
+                href="{{ url_for('recharge_page') }}"
+                class="cancel-link"
+            >
+                ✖️ Cancel
+            </a>
+
+
+        </form>
+
+
+        {% else %}
+
+        <!-- ADD FORM -->
+
+        <form
+            action="{{ url_for('add_recharge') }}"
+            method="POST"
+            class="form-grid"
+        >
+
+            <div class="form-group">
+
+                <label>Mobile Number</label>
+
+                <input
+                    type="text"
+                    name="mobile_number"
+                    placeholder="10-digit mobile number"
+                    required
+                >
+
+            </div>
+
+
+            <div
+                class="form-group"
+                style="grid-column: 1 / -1;"
+            >
+
+                <label>Operator</label>
+
+                <div
+                    class="operator-picker"
+                    id="operatorPickerAdd"
+                >
+
+                    <div
+                        class="operator-option"
+                        data-value="Jio"
+                        onclick="selectOperator(this, 'operatorPickerAdd', 'operatorHiddenAdd', 'otherOperatorAdd')"
+                    >
+                        <div class="operator-logo logo-jio">Jio</div>
+                        Jio
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="Airtel"
+                        onclick="selectOperator(this, 'operatorPickerAdd', 'operatorHiddenAdd', 'otherOperatorAdd')"
+                    >
+                        <div class="operator-logo logo-airtel">A</div>
+                        Airtel
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="Vi"
+                        onclick="selectOperator(this, 'operatorPickerAdd', 'operatorHiddenAdd', 'otherOperatorAdd')"
+                    >
+                        <div class="operator-logo logo-vi">Vi</div>
+                        Vi
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="BSNL"
+                        onclick="selectOperator(this, 'operatorPickerAdd', 'operatorHiddenAdd', 'otherOperatorAdd')"
+                    >
+                        <div class="operator-logo logo-bsnl">BS</div>
+                        BSNL
+                    </div>
+
+                    <div
+                        class="operator-option"
+                        data-value="Other"
+                        onclick="selectOperator(this, 'operatorPickerAdd', 'operatorHiddenAdd', 'otherOperatorAdd')"
+                    >
+                        <div class="operator-logo logo-other">?</div>
+                        Other
+                    </div>
+
+                </div>
+
+                <input
+                    type="text"
+                    id="otherOperatorAdd"
+                    placeholder="Operator ka naam likhein"
+                    style="display:none; margin-top:8px;"
+                    oninput="document.getElementById('operatorHiddenAdd').value = this.value;"
+                >
+
+                <input
+                    type="hidden"
+                    name="operator"
+                    id="operatorHiddenAdd"
+                    value=""
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Circle</label>
+
+                <select name="circle">
+
+                    <option value="">-- Select Circle --</option>
+
+                    {% for circle_name in [
+                        "Delhi", "Mumbai", "Kolkata", "Chennai",
+                        "Andhra Pradesh", "Assam", "Bihar & Jharkhand",
+                        "Gujarat", "Haryana", "Himachal Pradesh",
+                        "Jammu & Kashmir", "Karnataka", "Kerala",
+                        "Madhya Pradesh & Chhattisgarh",
+                        "Maharashtra & Goa", "North East", "Odisha",
+                        "Punjab", "Rajasthan", "Tamil Nadu",
+                        "UP East", "UP West", "West Bengal"
+                    ] %}
+
+                    <option value="{{ circle_name }}">
+                        {{ circle_name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Amount (₹)</label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0.01"
+                    name="amount"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Date & Time (khaali chodein current ke liye)</label>
+
+                <input
+                    type="text"
+                    name="transaction_datetime"
+                    placeholder="DD/MM/YYYY HH:MM"
+                >
+
+            </div>
+
+
+            <div
+                class="form-group"
+                style="grid-column: 1 / -1;"
+            >
+
+                <label>Remarks (optional)</label>
+
+                <textarea
+                    name="remarks"
+                    rows="2"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                📱 Add Recharge
+            </button>
+
+
+        </form>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- RECHARGE HISTORY -->
+
+    <div class="box">
+
+        <h1 style="font-size:20px;">
+            📋 Recharge History
+        </h1>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date & Time</th>
+                        <th>Mobile Number</th>
+                        <th>Operator</th>
+                        <th>Circle</th>
+                        <th>Amount</th>
+                        <th>Remarks</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for row in recharges %}
+
+                    <tr>
+
+                        <td>
+                            {{ row['transaction_datetime'] }}
+                        </td>
+
+                        <td>
+                            {{ row['mobile_number'] }}
+                        </td>
+
+                        <td>
+
+                            {% if row['operator'] %}
+
+                            <span class="operator-badge-small">
+
+                                {% if row['operator'] == 'Jio' %}
+                                <span class="operator-logo logo-jio">Jio</span>
+                                {% elif row['operator'] == 'Airtel' %}
+                                <span class="operator-logo logo-airtel">A</span>
+                                {% elif row['operator'] == 'Vi' %}
+                                <span class="operator-logo logo-vi">Vi</span>
+                                {% elif row['operator'] == 'BSNL' %}
+                                <span class="operator-logo logo-bsnl">BS</span>
+                                {% else %}
+                                <span class="operator-logo logo-other">?</span>
+                                {% endif %}
+
+                                {{ row['operator'] }}
+
+                            </span>
+
+                            {% else %}
+
+                            -
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ row['circle'] or '-' }}
+                        </td>
+
+                        <td class="amount-cell">
+                            ₹{{ "%.2f"|format(row['amount']) }}
+                        </td>
+
+                        <td>
+                            {{ row['remarks'] or '-' }}
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a
+                                    href="{{ url_for(
+                                        'edit_recharge',
+                                        recharge_id=row['id']
+                                    ) }}"
+                                    class="edit-btn"
+                                >
+                                    ✏️ Edit
+                                </a>
+
+
+                                <form
+                                    action="{{ url_for(
+                                        'delete_recharge',
+                                        recharge_id=row['id']
+                                    ) }}"
+                                    method="POST"
+                                    onsubmit="return confirm(
+                                        'Kya aap ye recharge record delete karna chahte hain?'
+                                    );"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn"
+                                    >
+                                        🗑️ Delete
+                                    </button>
+
+                                </form>
+
+
+                                <a
+                                    href="javascript:void(0);"
+                                    class="edit-btn"
+                                    style="background:#8b5cf6;"
+                                    onclick="toggleRefundRow('refund-row-{{ row['id'] }}')"
+                                >
+                                    💵 Refund
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        id="refund-row-{{ row['id'] }}"
+                        style="display:none; background:#fffbeb;"
+                    >
+
+                        <td colspan="7">
+
+                            {% if row['total_refund'] and row['total_refund'] > 0 %}
+
+                            <div
+                                style="
+                                    font-weight:bold;
+                                    color:#b45309;
+                                    margin-bottom:10px;
+                                "
+                            >
+                                💵 Total Refunded: ₹{{ "%.2f"|format(row['total_refund']) }}
+                                (out of ₹{{ "%.2f"|format(row['amount']) }})
+                            </div>
+
+                            {% for refund in row['refunds'] %}
+
+                            <div
+                                style="
+                                    display:flex;
+                                    justify-content:space-between;
+                                    align-items:center;
+                                    padding:8px 0;
+                                    border-bottom:1px dashed #fcd34d;
+                                    font-size:13px;
+                                "
+                            >
+
+                                <div>
+                                    ₹{{ "%.2f"|format(refund['amount']) }}
+                                    &nbsp;on&nbsp;
+                                    {{ refund['transaction_datetime'] }}
+                                    {% if refund['remarks'] %}
+                                    &nbsp;-&nbsp;{{ refund['remarks'] }}
+                                    {% endif %}
+                                </div>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'delete_recharge_refund',
+                                        refund_id=refund['id']
+                                    ) }}"
+                                    onsubmit="return confirm(
+                                        'Is refund entry ko delete karna hai?'
+                                    );"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn"
+                                        style="padding:4px 10px; font-size:12px;"
+                                    >
+                                        🗑️
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                            {% endfor %}
+
+                            {% endif %}
+
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'add_recharge_refund',
+                                    recharge_id=row['id']
+                                ) }}"
+                                style="
+                                    display:grid;
+                                    grid-template-columns: 1fr 1fr;
+                                    gap:10px;
+                                    margin-top:10px;
+                                "
+                            >
+
+                                <div>
+
+                                    <label style="font-size:12px; font-weight:bold;">
+                                        Refund Amount (₹)
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        min="0.01"
+                                        name="refund_amount"
+                                        required
+                                        style="
+                                            width:100%;
+                                            padding:8px;
+                                            border:1px solid #d1d5db;
+                                            border-radius:6px;
+                                        "
+                                    >
+
+                                </div>
+
+
+                                <div>
+
+                                    <label style="font-size:12px; font-weight:bold;">
+                                        Date & Time (optional)
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="refund_datetime"
+                                        placeholder="DD/MM/YYYY HH:MM"
+                                        style="
+                                            width:100%;
+                                            padding:8px;
+                                            border:1px solid #d1d5db;
+                                            border-radius:6px;
+                                        "
+                                    >
+
+                                </div>
+
+
+                                <div style="grid-column: 1 / -1;">
+
+                                    <label style="font-size:12px; font-weight:bold;">
+                                        Remarks (optional)
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="refund_remarks"
+                                        style="
+                                            width:100%;
+                                            padding:8px;
+                                            border:1px solid #d1d5db;
+                                            border-radius:6px;
+                                        "
+                                    >
+
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    style="
+                                        grid-column: 1 / -1;
+                                        padding:10px;
+                                        background:#f59e0b;
+                                        color:white;
+                                        border:none;
+                                        border-radius:6px;
+                                        font-weight:bold;
+                                        cursor:pointer;
+                                    "
+                                >
+                                    ✅ Save Refund
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="no-data"
+                        >
+                            Koi recharge record nahi mila.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+function toggleRefundRow(rowId) {
+
+    const row =
+        document.getElementById(rowId);
+
+    if (row.style.display === "none") {
+
+        row.style.display = "table-row";
+
+    } else {
+
+        row.style.display = "none";
+
+    }
+
+}
+
+
+function selectOperator(
+    el,
+    pickerId,
+    hiddenId,
+    otherInputId
+) {
+
+    const picker =
+        document.getElementById(pickerId);
+
+    picker.querySelectorAll(
+        ".operator-option"
+    ).forEach(function (opt) {
+
+        opt.classList.remove("selected");
+
+    });
+
+    el.classList.add("selected");
+
+    const value =
+        el.getAttribute("data-value");
+
+    const otherInput =
+        document.getElementById(otherInputId);
+
+    if (value === "Other") {
+
+        otherInput.style.display = "block";
+
+        document.getElementById(hiddenId).value =
+            otherInput.value;
+
+        otherInput.focus();
+
+    } else {
+
+        otherInput.style.display = "none";
+
+        document.getElementById(hiddenId).value =
+            value;
+
+    }
+
+}
+
+
+// Edit mode mein pehle se saved operator ko preselect karna
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const editHidden =
+            document.getElementById("operatorHiddenEdit");
+
+        if (!editHidden) {
+            return;
+        }
+
+        const currentValue =
+            editHidden.value;
+
+        const knownOperators =
+            ["Jio", "Airtel", "Vi", "BSNL"];
+
+        const picker =
+            document.getElementById("operatorPickerEdit");
+
+        if (knownOperators.includes(currentValue)) {
+
+            const match = picker.querySelector(
+                '[data-value="' + currentValue + '"]'
+            );
+
+            if (match) {
+                match.classList.add("selected");
+            }
+
+        } else if (currentValue) {
+
+            const otherOption = picker.querySelector(
+                '[data-value="Other"]'
+            );
+
+            otherOption.classList.add("selected");
+
+            const otherInput =
+                document.getElementById("otherOperatorEdit");
+
+            otherInput.style.display = "block";
+            otherInput.value = currentValue;
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

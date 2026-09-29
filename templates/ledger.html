@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Ledger Statement</title>
+    <title>Capital Ledger Statement</title>
 
 
     <style>
@@ -24,41 +24,51 @@
 
             margin: 0;
 
-            padding: 25px;
+            padding: 30px;
 
-            background: #f1f5f9;
+            background: #f4f6f8;
 
             font-family: Arial, sans-serif;
 
-            color: #111827;
         }
 
 
         .container {
 
-            max-width: 1200px;
+            max-width: 1100px;
 
             margin: auto;
+
         }
 
 
-        /* =========================
-           HEADER
-        ========================= */
-
-        .header {
+        .box {
 
             background: white;
 
-            padding: 22px;
+            padding: 30px;
 
-            border-radius: 14px;
+            border-radius: 12px;
 
             box-shadow:
                 0 4px 15px
-                rgba(0,0,0,0.08);
+                rgba(0,0,0,0.10);
 
-            margin-bottom: 20px;
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            font-size: 26px;
+
+        }
+
+
+        .top-bar {
 
             display: flex;
 
@@ -66,251 +76,192 @@
 
             align-items: center;
 
-            gap: 15px;
+            margin-bottom: 20px;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
         }
 
 
-        .header h1 {
+        .back-link {
 
-            margin: 0;
+            padding: 10px 16px;
 
-            color: #7c3aed;
-        }
-
-
-        .back-button {
-
-            background: #374151;
+            background: #6b7280;
 
             color: white;
 
             text-decoration: none;
 
-            padding: 11px 18px;
-
             border-radius: 7px;
 
-            font-weight: bold;
+            font-size: 14px;
+
         }
 
 
-        .back-button:hover {
+        .filter-form {
 
-            background: #1f2937;
+            display: flex;
+
+            gap: 12px;
+
+            align-items: flex-end;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 25px;
+
+            background: #f9fafb;
+
+            padding: 16px;
+
+            border-radius: 10px;
+
+            border: 1px solid #e5e7eb;
+
         }
 
 
-        /* =========================
-           SEARCH BOX
-        ========================= */
+        .filter-form .field {
 
-        .box {
+            display: flex;
 
-            background: white;
+            flex-direction: column;
 
-            padding: 22px;
+            gap: 6px;
 
-            border-radius: 14px;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.08);
-
-            margin-bottom: 20px;
         }
 
 
-        .box h2 {
+        .filter-form label {
 
-            margin-top: 0;
-
-            color: #7c3aed;
-        }
-
-
-        .search-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr 1fr;
-
-            gap: 15px;
-        }
-
-
-        label {
-
-            display: block;
+            font-size: 13px;
 
             font-weight: bold;
-
-            margin-bottom: 7px;
 
             color: #374151;
+
         }
 
 
-        input,
-        select {
+        .filter-form input {
 
-            width: 100%;
-
-            padding: 12px;
+            padding: 10px;
 
             border: 1px solid #d1d5db;
 
             border-radius: 7px;
 
-            font-size: 15px;
+            font-size: 14px;
 
-            background: white;
         }
 
 
-        input:focus,
-        select:focus {
+        .filter-form button {
 
-            outline: none;
+            padding: 10px 20px;
 
-            border-color: #7c3aed;
+            background: #f59e0b;
 
-            box-shadow:
-                0 0 0 2px
-                rgba(124,58,237,0.10);
-        }
-
-
-        .search-button {
-
-            margin-top: 18px;
-
-            width: 100%;
-
-            padding: 13px;
+            color: white;
 
             border: none;
 
             border-radius: 7px;
 
-            background: #7c3aed;
-
-            color: white;
-
-            font-size: 16px;
-
             font-weight: bold;
 
             cursor: pointer;
+
+            font-size: 14px;
+
         }
 
 
-        .search-button:hover {
+        .filter-form .clear-link {
 
-            background: #6d28d9;
+            padding: 10px 16px;
+
+            background: #6b7280;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
         }
 
 
-        /* =========================
-           CUSTOMER DETAILS
-        ========================= */
-
-        .customer-details {
+        .summary-cards {
 
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 15px;
-        }
-
-
-        .detail-card {
-
-            background: #f8fafc;
-
-            padding: 16px;
-
-            border-radius: 9px;
-
-            border-left:
-                4px solid #7c3aed;
-        }
-
-
-        .detail-title {
-
-            color: #6b7280;
-
-            font-size: 13px;
-
-            margin-bottom: 5px;
-        }
-
-
-        .detail-value {
-
-            font-weight: bold;
-
-            font-size: 16px;
-        }
-
-
-        /* =========================
-           SUMMARY
-        ========================= */
-
-        .summary {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
+                repeat(4, 1fr);
 
             gap: 15px;
 
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+
         }
 
 
         .summary-card {
 
-            background: #f8fafc;
-
-            padding: 20px;
+            padding: 16px;
 
             border-radius: 10px;
 
             text-align: center;
+
+            color: white;
+
         }
 
 
-        .summary-title {
+        .summary-card .label {
 
-            color: #6b7280;
+            font-size: 13px;
 
-            margin-bottom: 7px;
+            opacity: 0.9;
+
+            margin-bottom: 6px;
+
         }
 
 
-        .summary-value {
+        .summary-card .value {
 
-            font-size: 26px;
+            font-size: 20px;
 
             font-weight: bold;
 
-            color: #7c3aed;
         }
 
 
-        /* =========================
-           TABLE
-        ========================= */
+        .card-opening {
+            background: #6366f1;
+        }
 
-        .table-container {
 
-            overflow-x: auto;
+        .card-debit {
+            background: #ef4444;
+        }
+
+
+        .card-credit {
+            background: #10b981;
+        }
+
+
+        .card-closing {
+            background: #0ea5e9;
         }
 
 
@@ -320,50 +271,88 @@
 
             border-collapse: collapse;
 
-            min-width: 800px;
+            font-size: 14px;
+
         }
 
 
-        th {
+        thead th {
 
-            background: #7c3aed;
+            background: #111827;
 
             color: white;
 
-            padding: 13px;
+            padding: 12px 10px;
 
             text-align: left;
+
+            white-space: nowrap;
+
         }
 
 
-        td {
+        tbody td {
 
-            padding: 12px;
+            padding: 12px 10px;
 
-            border-bottom:
-                1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+
         }
 
 
-        tr:hover {
+        tbody tr:hover {
 
-            background: #f8fafc;
+            background: #f9fafb;
+
         }
 
 
-        .amount {
+        .opening-row td {
+
+            background: #eef2ff;
 
             font-weight: bold;
+
+            color: #4338ca;
+
+        }
+
+
+        .debit-amount {
 
             color: #dc2626;
-        }
-
-
-        .running {
 
             font-weight: bold;
 
-            color: #7c3aed;
+            white-space: nowrap;
+
+        }
+
+
+        .credit-amount {
+
+            color: #059669;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+        }
+
+
+        .balance-amount {
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+        }
+
+
+        .dash {
+
+            color: #9ca3af;
+
         }
 
 
@@ -371,129 +360,45 @@
 
             text-align: center;
 
-            padding: 30px;
+            padding: 40px;
 
             color: #6b7280;
-        }
-
-
-        /* =========================
-           PRINT
-        ========================= */
-
-        .print-button {
-
-            background: #2563eb;
-
-            color: white;
-
-            border: none;
-
-            padding: 11px 18px;
-
-            border-radius: 7px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-
-        .print-button:hover {
-
-            background: #1d4ed8;
-        }
-
-
-        .actions {
-
-            display: flex;
-
-            justify-content: flex-end;
-
-            margin-bottom: 15px;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media(max-width:800px) {
-
-            body {
-
-                padding: 12px;
-            }
-
-
-            .header {
-
-                flex-direction: column;
-
-                align-items: stretch;
-
-                text-align: center;
-            }
-
-
-            .search-grid {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            .customer-details {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            .summary {
-
-                grid-template-columns: 1fr;
-            }
 
         }
 
 
-        /* =========================
-           PRINT CSS
-        ========================= */
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
 
         @media print {
 
+            .filter-form,
+            .back-link,
+            .top-bar {
+                display: none;
+            }
+
             body {
-
                 background: white;
-
                 padding: 0;
             }
 
-
-            .header {
-
-                box-shadow: none;
-
-                border-bottom:
-                    2px solid #111827;
-            }
-
-
-            .back-button,
-            .search-box,
-            .print-button,
-            .actions {
-
-                display: none !important;
-            }
-
-
             .box {
-
                 box-shadow: none;
+            }
 
-                border: 1px solid #ddd;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .summary-cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
         }
@@ -509,371 +414,177 @@
 <div class="container">
 
 
-    <!-- HEADER -->
+    <div class="box">
 
-    <div class="header">
+
+        <div class="top-bar">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="back-link"
+            >
+                ⬅️ Back to Home
+            </a>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+
+                <a
+                    href="{{ url_for(
+                        'ledger_export_excel',
+                        from_date=from_date,
+                        to_date=to_date
+                    ) }}"
+                    class="back-link"
+                    style="background:#10b981;"
+                >
+                    📊 Excel
+                </a>
+
+                <a
+                    href="{{ url_for(
+                        'ledger_export_pdf',
+                        from_date=from_date,
+                        to_date=to_date
+                    ) }}"
+                    class="back-link"
+                    style="background:#dc2626;"
+                >
+                    📄 PDF
+                </a>
+
+                <a
+                    href="javascript:window.print()"
+                    class="back-link"
+                    style="background:#374151;"
+                >
+                    🖨️ Print
+                </a>
+
+            </div>
+
+        </div>
+
 
         <h1>
-
-            📒 Ledger Statement
-
+            📒 Capital Ledger Statement
         </h1>
 
 
-        <a
-            href="/"
-            class="back-button"
-        >
-
-            ← Dashboard
-
-        </a>
-
-    </div>
-
-
-    <!-- =========================
-         SEARCH
-    ========================= -->
-
-    <div class="box search-box">
-
-        <h2>
-
-            🔎 Find Account Ledger
-
-        </h2>
-
+        <!-- FILTER FORM -->
 
         <form
             method="GET"
-            action="/ledger"
+            action="{{ url_for('ledger') }}"
+            class="filter-form"
         >
 
+            <div class="field">
 
-            <div class="search-grid">
+                <label>From Date</label>
 
-
-                <!-- ACCOUNT -->
-
-                <div>
-
-                    <label>
-
-                        Account Number
-
-                    </label>
-
-
-                    <select
-                        name="account_number"
-                        required
-                    >
-
-                        <option value="">
-
-                            -- Select Account --
-
-                        </option>
-
-
-                        {% for item in customers %}
-
-                        <option
-                            value="{{ item['account_number'] }}"
-                            {% if account_number == item['account_number'] %}
-                            selected
-                            {% endif %}
-                        >
-
-                            {{ item['account_number'] }}
-                            -
-                            {{ item['name'] }}
-
-                        </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-
-                <!-- FROM DATE -->
-
-                <div>
-
-                    <label>
-
-                        From Date
-
-                    </label>
-
-
-                    <input
-                        type="date"
-                        name="from_date"
-                        value="{{ from_date }}"
-                    >
-
-                </div>
-
-
-                <!-- TO DATE -->
-
-                <div>
-
-                    <label>
-
-                        To Date
-
-                    </label>
-
-
-                    <input
-                        type="date"
-                        name="to_date"
-                        value="{{ to_date }}"
-                    >
-
-                </div>
-
+                <input
+                    type="date"
+                    name="from_date"
+                    value="{{ from_date }}"
+                >
 
             </div>
 
 
-            <button
-                type="submit"
-                class="search-button"
-            >
+            <div class="field">
 
-                📒 View Ledger
+                <label>To Date</label>
 
+                <input
+                    type="date"
+                    name="to_date"
+                    value="{{ to_date }}"
+                >
+
+            </div>
+
+
+            <button type="submit">
+                🔍 Filter
             </button>
+
+
+            {% if from_date or to_date %}
+
+            <a
+                href="{{ url_for('ledger') }}"
+                class="clear-link"
+            >
+                ✖️ Clear
+            </a>
+
+            {% endif %}
 
 
         </form>
 
-    </div>
 
+        <!-- SUMMARY CARDS -->
 
-    {% if customer %}
+        <div class="summary-cards">
 
+            <div class="summary-card card-opening">
 
-    <!-- =========================
-         CUSTOMER DETAILS
-    ========================= -->
-
-    <div class="box">
-
-        <h2>
-
-            👤 Account Details
-
-        </h2>
-
-
-        <div class="customer-details">
-
-
-            <div class="detail-card">
-
-                <div class="detail-title">
-
-                    Account Number
-
+                <div class="label">
+                    Opening Balance
                 </div>
 
-                <div class="detail-value">
-
-                    {{ customer["account_number"] }}
-
+                <div class="value">
+                    ₹{{ "%.2f"|format(opening_balance) }}
                 </div>
 
             </div>
 
 
-            <div class="detail-card">
+            <div class="summary-card card-debit">
 
-                <div class="detail-title">
-
-                    Customer Name
-
+                <div class="label">
+                    Total Debit
                 </div>
 
-                <div class="detail-value">
-
-                    {{ customer["name"] }}
-
+                <div class="value">
+                    ₹{{ "%.2f"|format(total_debit) }}
                 </div>
 
             </div>
 
 
-            <div class="detail-card">
+            <div class="summary-card card-credit">
 
-                <div class="detail-title">
-
-                    Mobile Number
-
+                <div class="label">
+                    Total Credit
                 </div>
 
-                <div class="detail-value">
-
-                    {{ customer["mobile"] or "-" }}
-
+                <div class="value">
+                    ₹{{ "%.2f"|format(total_credit) }}
                 </div>
 
             </div>
 
 
-            <div class="detail-card">
+            <div class="summary-card card-closing">
 
-                <div class="detail-title">
-
-                    Bank Name
-
+                <div class="label">
+                    Closing Balance
                 </div>
 
-                <div class="detail-value">
-
-                    {{ customer["bank_name"] or "-" }}
-
+                <div class="value">
+                    ₹{{ "%.2f"|format(closing_balance) }}
                 </div>
-
-            </div>
-
-
-            <div class="detail-card">
-
-                <div class="detail-title">
-
-                    IFSC Code
-
-                </div>
-
-                <div class="detail-value">
-
-                    {{ customer["ifsc_code"] or "-" }}
-
-                </div>
-
-            </div>
-
-
-            <div class="detail-card">
-
-                <div class="detail-title">
-
-                    Statement Period
-
-                </div>
-
-                <div class="detail-value">
-
-                    {% if from_date %}
-
-                        {{ from_date }}
-
-                    {% else %}
-
-                        Beginning
-
-                    {% endif %}
-
-                    →
-
-                    {% if to_date %}
-
-                        {{ to_date }}
-
-                    {% else %}
-
-                        Today
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         SUMMARY
-    ========================= -->
-
-    <div class="summary">
-
-
-        <div class="summary-card">
-
-            <div class="summary-title">
-
-                Total Transactions
-
-            </div>
-
-
-            <div class="summary-value">
-
-                {{ transactions|length }}
 
             </div>
 
         </div>
 
 
-        <div class="summary-card">
+        <!-- LEDGER TABLE -->
 
-            <div class="summary-title">
-
-                Total Amount
-
-            </div>
-
-
-            <div class="summary-value">
-
-                ₹{{ "%.2f"|format(total_amount) }}
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =========================
-         LEDGER TABLE
-    ========================= -->
-
-    <div class="box">
-
-        <div class="actions">
-
-            <button
-                class="print-button"
-                onclick="window.print()"
-            >
-
-                🖨️ Print Ledger
-
-            </button>
-
-        </div>
-
-
-        <div class="table-container">
-
-
-            {% if transactions %}
-
+        <div class="table-wrapper">
 
             <table>
 
@@ -881,29 +592,12 @@
 
                     <tr>
 
-                        <th>
-                            #
-                        </th>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            UTR Number
-                        </th>
-
-                        <th>
-                            Site
-                        </th>
-
-                        <th>
-                            Amount
-                        </th>
-
-                        <th>
-                            Running Total
-                        </th>
+                        <th>Date & Time</th>
+                        <th>Particular</th>
+                        <th>Site</th>
+                        <th>Debit (₹)</th>
+                        <th>Credit (₹)</th>
+                        <th>Balance (₹)</th>
 
                     </tr>
 
@@ -913,145 +607,143 @@
                 <tbody>
 
 
-                {% set running_total = 0 %}
-
-
-                {% for transaction in transactions %}
-
-
-                    {% set running_total =
-                        running_total +
-                        (transaction["amount"] or 0)
-                    %}
-
+                    {% for entry in entries %}
 
                     <tr>
 
+                        <td>
+                            {{ entry['date_display'] }}
+                        </td>
+
+                        <td>
+                            {{ entry['particular'] }}
+                        </td>
+
+                        <td>
+                            {{ entry['site'] }}
+                        </td>
 
                         <td>
 
-                            {{ loop.index }}
+                            {% if entry['debit'] > 0 %}
+
+                            <span class="debit-amount">
+                                ₹{{ "%.2f"|format(entry['debit']) }}
+                            </span>
+
+                            {% else %}
+
+                            <span class="dash">-</span>
+
+                            {% endif %}
 
                         </td>
-
 
                         <td>
 
-                            {{ transaction["transaction_datetime"] or "-" }}
+                            {% if entry['credit'] > 0 %}
+
+                            <span class="credit-amount">
+                                ₹{{ "%.2f"|format(entry['credit']) }}
+                            </span>
+
+                            {% else %}
+
+                            <span class="dash">-</span>
+
+                            {% endif %}
 
                         </td>
 
-
-                        <td>
-
-                            {{ transaction["utr_number"] or "-" }}
-
+                        <td class="balance-amount">
+                            ₹{{ "%.2f"|format(entry['balance']) }}
                         </td>
-
-
-                        <td>
-
-                            {{ transaction["site"] or "-" }}
-
-                        </td>
-
-
-                        <td class="amount">
-
-                            ₹{{ "%.2f"|format(
-                                transaction["amount"] or 0
-                            ) }}
-
-                        </td>
-
-
-                        <td class="running">
-
-                            ₹{{ "%.2f"|format(
-                                running_total
-                            ) }}
-
-                        </td>
-
 
                     </tr>
 
+                    {% else %}
 
-                {% endfor %}
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="no-data"
+                        >
+                            Is date range mein koi
+                            transaction nahi mili.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    <tr class="opening-row">
+
+                        <td>
+                            {{ from_date if from_date else "-" }}
+                        </td>
+
+                        <td>
+                            Opening Balance
+                        </td>
+
+                        <td>-</td>
+
+                        <td>
+                            <span class="dash">-</span>
+                        </td>
+
+                        <td>
+                            <span class="dash">-</span>
+                        </td>
+
+                        <td>
+                            ₹{{ "%.2f"|format(opening_balance) }}
+                        </td>
+
+                    </tr>
 
 
                 </tbody>
 
 
+
+                {% if entries %}
+
                 <tfoot>
 
-                    <tr>
+                    <tr style="background:#f3f4f6; font-weight:bold;">
 
-                        <th colspan="4">
+                        <td colspan="3">
+                            Closing Balance
+                        </td>
 
-                            Total
+                        <td>
+                            ₹{{ "%.2f"|format(total_debit) }}
+                        </td>
 
-                        </th>
+                        <td>
+                            ₹{{ "%.2f"|format(total_credit) }}
+                        </td>
 
-
-                        <th class="amount">
-
-                            ₹{{ "%.2f"|format(
-                                total_amount
-                            ) }}
-
-                        </th>
-
-
-                        <th class="running">
-
-                            ₹{{ "%.2f"|format(
-                                total_amount
-                            ) }}
-
-                        </th>
+                        <td>
+                            ₹{{ "%.2f"|format(closing_balance) }}
+                        </td>
 
                     </tr>
 
                 </tfoot>
 
+                {% endif %}
+
 
             </table>
 
-
-            {% else %}
-
-
-            <div class="no-data">
-
-                📭 No transactions found for this account/date range.
-
-            </div>
-
-
-            {% endif %}
-
-
         </div>
 
-    </div>
-
-
-    {% elif account_number %}
-
-
-    <div class="box">
-
-        <div class="no-data">
-
-            ❌ Account not found.
-
-        </div>
 
     </div>
-
-
-    {% endif %}
 
 
 </div>

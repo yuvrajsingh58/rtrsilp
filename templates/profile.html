@@ -1463,11 +1463,15 @@ Editing Transaction #{{ edit_batch["id"] }}
 <tr>
 
 
+<td style="display:none;">
+
 <input
     type="hidden"
     name="transaction_id[]"
     value="{{ transaction['id'] }}"
 >
+
+</td>
 
 
 <td>
@@ -2138,9 +2142,34 @@ function deleteEditRow(button) {
     }
 
 
-    button
-        .closest("tr")
-        .remove();
+    const row =
+        button.closest("tr");
+
+
+    const idInput =
+        row.querySelector(
+            'input[name="transaction_id[]"]'
+        );
+
+
+    if (idInput && idInput.value) {
+
+        const form =
+            row.closest("form");
+
+        const deletedInput =
+            document.createElement("input");
+
+        deletedInput.type = "hidden";
+        deletedInput.name = "deleted_transaction_id[]";
+        deletedInput.value = idInput.value;
+
+        form.appendChild(deletedInput);
+
+    }
+
+
+    row.remove();
 
 
     calculateEditTotal();
@@ -2618,6 +2647,199 @@ Transactions:
 
 </div>
 
+
+</div>
+
+
+<!-- REFUND SECTION -->
+
+<div
+    style="
+        padding: 15px 20px;
+        border-top: 1px solid #e5e7eb;
+        background: #fffbeb;
+    "
+>
+
+    {% if batch['total_refund'] and batch['total_refund'] > 0 %}
+
+    <div
+        style="
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #b45309;
+        "
+    >
+        💵 Total Refunded: ₹{{ "%.2f"|format(batch['total_refund']) }}
+        (out of ₹{{ "%.2f"|format(batch['total_amount'] or 0) }})
+    </div>
+
+    {% for refund in batch['refunds'] %}
+
+    <div
+        style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:8px 0;
+            border-bottom:1px dashed #fcd34d;
+            font-size:13px;
+        "
+    >
+
+        <div>
+            ₹{{ "%.2f"|format(refund['amount']) }}
+            &nbsp;on&nbsp;
+            {{ refund['transaction_datetime'] }}
+            {% if refund['remarks'] %}
+            &nbsp;-&nbsp;{{ refund['remarks'] }}
+            {% endif %}
+        </div>
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'delete_refund',
+                refund_id=refund['id']
+            ) }}"
+            onsubmit="return confirm(
+                'Is refund entry ko delete karna hai?'
+            );"
+        >
+
+            <button
+                type="submit"
+                style="
+                    background:#ef4444;
+                    color:white;
+                    border:none;
+                    padding:4px 10px;
+                    border-radius:5px;
+                    font-size:12px;
+                    cursor:pointer;
+                "
+            >
+                🗑️
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+
+    <details style="margin-top:10px;">
+
+        <summary
+            style="
+                cursor:pointer;
+                font-weight:bold;
+                color:#b45309;
+            "
+        >
+            💵 Add Refund
+        </summary>
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'add_refund',
+                batch_id=batch['id']
+            ) }}"
+            style="
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap:10px;
+                margin-top:12px;
+            "
+        >
+
+            <div>
+
+                <label style="font-size:12px; font-weight:bold;">
+                    Refund Amount (₹)
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    min="0.01"
+                    name="refund_amount"
+                    required
+                    style="
+                        width:100%;
+                        padding:8px;
+                        border:1px solid #d1d5db;
+                        border-radius:6px;
+                    "
+                >
+
+            </div>
+
+
+            <div>
+
+                <label style="font-size:12px; font-weight:bold;">
+                    Date & Time (optional)
+                </label>
+
+                <input
+                    type="text"
+                    name="refund_datetime"
+                    placeholder="DD/MM/YYYY HH:MM"
+                    style="
+                        width:100%;
+                        padding:8px;
+                        border:1px solid #d1d5db;
+                        border-radius:6px;
+                    "
+                >
+
+            </div>
+
+
+            <div style="grid-column: 1 / -1;">
+
+                <label style="font-size:12px; font-weight:bold;">
+                    Remarks (optional)
+                </label>
+
+                <input
+                    type="text"
+                    name="refund_remarks"
+                    style="
+                        width:100%;
+                        padding:8px;
+                        border:1px solid #d1d5db;
+                        border-radius:6px;
+                    "
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                style="
+                    grid-column: 1 / -1;
+                    padding:10px;
+                    background:#f59e0b;
+                    color:white;
+                    border:none;
+                    border-radius:6px;
+                    font-weight:bold;
+                    cursor:pointer;
+                "
+            >
+                ✅ Save Refund
+            </button>
+
+        </form>
+
+    </details>
 
 </div>
 

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - Analytics</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 30px;
+
+            background: #f4f6f8;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+        }
+
+
+        .box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.10);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            font-size: 26px;
+
+        }
+
+
+        h2 {
+
+            font-size: 18px;
+
+            margin-bottom: 15px;
+
+            color: #111827;
+
+        }
+
+
+        .top-bar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .back-link {
+
+            padding: 10px 16px;
+
+            background: #6b7280;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+        }
+
+
+        .capital-badge {
+
+            padding: 10px 18px;
+
+            background: #10b981;
+
+            color: white;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+        }
+
+
+        .charts-grid {
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr;
+
+            gap: 20px;
+
+        }
+
+
+        .chart-wrapper {
+
+            position: relative;
+
+            height: 320px;
+
+        }
+
+
+        .no-data {
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: #6b7280;
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="top-bar">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="back-link"
+        >
+            ⬅️ Back to Home
+        </a>
+
+        <div class="capital-badge">
+            💰 Capital: ₹{{ "%.2f"|format(current_capital) }}
+        </div>
+
+    </div>
+
+
+    <h1>
+        📊 Dashboard - Analytics
+    </h1>
+
+
+    {% if month_labels %}
+
+    <div class="box">
+
+        <h2>📈 Monthly Debit vs Credit (Last 6 Months)</h2>
+
+        <div class="chart-wrapper">
+            <canvas id="monthlyBarChart"></canvas>
+        </div>
+
+    </div>
+
+
+    <div class="charts-grid">
+
+        <div class="box">
+
+            <h2>💹 Capital Balance Trend</h2>
+
+            <div class="chart-wrapper">
+                <canvas id="balanceLineChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <div class="box">
+
+            <h2>🥧 This Month's Debit Breakdown</h2>
+
+            <div class="chart-wrapper">
+                <canvas id="breakdownPieChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="box">
+
+        <div class="no-data">
+            Abhi tak koi data nahi hai charts dikhane ke liye.
+            Kuch transactions, capital additions, ya recharges
+            add karein.
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+
+{% if month_labels %}
+<script>
+
+const monthLabels = {{ month_labels|tojson }};
+const monthlyDebit = {{ monthly_debit|tojson }};
+const monthlyCredit = {{ monthly_credit|tojson }};
+const monthlyBalance = {{ monthly_balance|tojson }};
+
+const paymentTotal = {{ payment_total }};
+const rechargeTotal = {{ recharge_total }};
+const otherDebitTotal = {{ other_debit_total }};
+
+
+new Chart(
+    document.getElementById("monthlyBarChart"),
+    {
+        type: "bar",
+        data: {
+            labels: monthLabels,
+            datasets: [
+                {
+                    label: "Debit (₹)",
+                    data: monthlyDebit,
+                    backgroundColor: "#ef4444"
+                },
+                {
+                    label: "Credit (₹)",
+                    data: monthlyCredit,
+                    backgroundColor: "#10b981"
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: "top" }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    }
+);
+
+
+new Chart(
+    document.getElementById("balanceLineChart"),
+    {
+        type: "line",
+        data: {
+            labels: monthLabels,
+            datasets: [
+                {
+                    label: "Balance (₹)",
+                    data: monthlyBalance,
+                    borderColor: "#8b5cf6",
+                    backgroundColor: "rgba(139,92,246,0.15)",
+                    fill: true,
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    }
+);
+
+
+const hasBreakdownData =
+    (paymentTotal + rechargeTotal + otherDebitTotal) > 0;
+
+new Chart(
+    document.getElementById("breakdownPieChart"),
+    {
+        type: "doughnut",
+        data: {
+            labels: hasBreakdownData
+                ? ["Customer Payments", "Mobile Recharge", "Other"]
+                : ["No data this month"],
+            datasets: [
+                {
+                    data: hasBreakdownData
+                        ? [paymentTotal, rechargeTotal, otherDebitTotal]
+                        : [1],
+                    backgroundColor: hasBreakdownData
+                        ? ["#3b82f6", "#f59e0b", "#9ca3af"]
+                        : ["#e5e7eb"]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: "bottom" }
+            }
+        }
+    }
+);
+
+</script>
+{% endif %}
+
+
+</body>
+
+</html>
